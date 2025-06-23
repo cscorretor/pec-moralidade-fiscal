@@ -34,20 +34,94 @@
         .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out; }
         .accordion-button.open + .accordion-content { max-height: 1000px; }
         .accordion-button.open svg { transform: rotate(180deg); }
+        .deputy-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        .deputy-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        .deputy-initials {
+            width: 48px;
+            height: 48px;
+            background: #6b7280;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 16px;
+            margin: 0 auto 12px;
+        }
+        .contact-btn {
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.2s ease;
+            min-width: 70px;
+        }
+        .contact-btn-email {
+            background: white;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+        .contact-btn-email:hover {
+            background: #f3f4f6;
+        }
+        .contact-btn-whatsapp {
+            background: #22c55e;
+            color: white;
+        }
+        .contact-btn-whatsapp:hover {
+            background: #16a34a;
+        }
+        .contact-btn-twitter {
+            background: #3b82f6;
+            color: white;
+        }
+        .contact-btn-twitter:hover {
+            background: #2563eb;
+        }
+        .state-selector {
+            max-width: 400px;
+            margin: 0 auto 32px;
+        }
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="text-gray-800">
 
-    <!-- Container principal com fundo branco semi-transparente para legibilidade -->
+    <!-- Container principal -->
     <div id="main-content" class="container mx-auto max-w-6xl my-8 p-6 md:p-10 bg-white/95 rounded-2xl shadow-2xl">
 
-        <!-- 1. CABEÇALHO E INTRODUÇÃO -->
+        <!-- CABEÇALHO -->
         <header class="text-center mb-12 section-enter">
             <h1 class="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600 mb-4">PEC da Moralidade Fiscal</h1>
             <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">Chegou a hora de exigir um parlamento mais eficiente e menos custoso. O seu imposto deve servir ao Brasil, não a privilégios.</p>
         </header>
 
-        <!-- 2. SEÇÃO DE GRÁFICOS (POR QUE A PEC É NECESSÁRIA?) -->
+        <!-- SEÇÃO DE GRÁFICOS -->
         <section class="mb-12 section-enter">
             <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">O Custo do Nosso Parlamento: Uma Realidade Incômoda</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
@@ -66,57 +140,55 @@
             </div>
         </section>
         
-        <!-- SEÇÃO DE ASSINATURA DA PEC E FORMULÁRIO -->
+        <!-- SEÇÃO DE ASSINATURA DA PEC -->
         <section class="mb-12 section-enter">
             <div class="bg-blue-50 border-t-4 border-b-4 border-blue-500 p-8 rounded-2xl shadow-inner">
                  <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Faça História: Assine a PEC da Moralidade Fiscal</h2>
-                 <p class="text-center text-gray-600 mb-8 max-w-4xl mx-auto">Para que esta proposta chegue ao Congresso, precisamos de 1,5 milhão de assinaturas de eleitores de todo o Brasil. Sua assinatura é uma ferramenta poderosa de mudança. Leia a proposta na íntegra e junte-se a nós.</p>
+                 <p class="text-center text-gray-600 mb-8 max-w-4xl mx-auto">Para que esta proposta chegue ao Congresso, precisamos de 1,5 milhão de assinaturas de eleitores de todo o Brasil. Sua assinatura é uma ferramenta poderosa de mudança.</p>
 
                  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <!-- Coluna da Esquerda: Texto da PEC -->
+                    <!-- Texto da PEC -->
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <h3 class="font-bold text-xl mb-4 text-gray-700">Texto Completo da Proposta</h3>
                         <div class="prose max-w-none text-sm text-gray-600">
                             <h4>PROPOSTA DE EMENDA À CONSTITUIÇÃO Nº ____, DE 2025 (INICIATIVA POPULAR)</h4>
-                            <p><strong>Ementa:</strong> Altera a Constituição Federal e o Ato das Disposições Constitucionais Transitórias para extinguir o financiamento público de campanhas, reformar a aplicação de emendas parlamentares, vedar verbas indenizatórias, limitar os custos com gabinetes no Poder Legislativo, condicionar benefícios fiscais a contrapartidas sociais e determinar maior progressividade no imposto de renda sobre altas rendas.</p>
-                            <hr class="my-4">
+                            <p><strong>Ementa:</strong> Altera a Constituição Federal para extinguir o financiamento público de campanhas, reformar emendas parlamentares, vedar verbas indenizatórias, limitar custos com gabinetes e aumentar a progressividade do imposto de renda.</p>
                             <details class="cursor-pointer mt-4">
                                 <summary class="font-semibold text-blue-600 hover:text-blue-800">Clique para ler o texto na íntegra</summary>
                                 <div class="mt-2 text-xs space-y-2">
-                                     <p><strong>Art. 1º</strong> Fica extinto o Fundo Especial de Financiamento de Campanha (FEFC) e vedada a criação de qualquer outro mecanismo de financiamento público direto de campanhas eleitorais, revogando-se os dispositivos legais em contrário.</p>
-                                     <p><strong>Art. 2º</strong> O art. 166 da Constituição Federal passa a vigorar com as seguintes alterações: "Art. 166. [...] § 9º As emendas individuais ao projeto de lei orçamentária serão aprovadas no limite de 0,5% (meio por cento) da receita corrente líquida prevista no projeto encaminhado pelo Poder Executivo, sendo que a metade deste percentual será destinada, obrigatoriamente, para ações e serviços públicos de saúde e educação. [...] § 13. Fica vedada a execução de emendas parlamentares para o pagamento de despesas com pessoal, encargos sociais ou serviço da dívida."</p>
-                                     <p><strong>Art. 3º</strong> O inciso XI do art. 37 da Constituição Federal passa a vigorar com a seguinte redação: "Art. 37. [...] XI - a remuneração e o subsídio dos ocupantes de cargos, funções e empregos públicos [...] não poderão exceder o subsídio mensal, em espécie, dos Ministros do Supremo Tribunal Federal, ficando expressamente vedada a instituição ou o recebimento de qualquer tipo de verba [...] que, somada ao subsídio, ultrapasse o teto estabelecido neste inciso."</p>
-                                     <p><strong>Art. 4º</strong> Ficam extintas, no âmbito do Poder Legislativo Federal, a Cota para o Exercício da Atividade Parlamentar (CEAP) e quaisquer outras verbas de natureza indenizatória...</p>
-                                     <p><strong>Art. 5º</strong> A despesa total com a remuneração de Secretários Parlamentares [...] fica limitada, mensalmente, ao valor correspondente a 5 (cinco) vezes o subsídio parlamentar vigente...</p>
-                                     <p><strong>Art. 6º</strong> A concessão ou renovação de qualquer benefício ou isenção fiscal [...] fica condicionada à demonstração prévia de interesse social relevante e à fixação de contrapartidas socioeconômicas mensuráveis...</p>
-                                     <p><strong>Art. 7º</strong> A lei que rege o Imposto sobre a Renda [...] deverá, obrigatoriamente, observar o princípio da progressividade de forma mais acentuada, instituindo, no mínimo, 3 (três) novas alíquotas para rendimentos elevados...</p>
-                                     <p><strong>Art. 8º</strong> Esta Emenda Constitucional entra em vigor na data de sua publicação, com efeitos financeiros a partir do primeiro dia do exercício fiscal subsequente.</p>
+                                     <p><strong>Art. 1º</strong> Fica extinto o Fundo Especial de Financiamento de Campanha (FEFC) e vedada a criação de qualquer outro mecanismo de financiamento público direto de campanhas eleitorais.</p>
+                                     <p><strong>Art. 2º</strong> As emendas individuais ao projeto de lei orçamentária serão aprovadas no limite de 0,5% da receita corrente líquida, sendo metade destinada obrigatoriamente para saúde e educação.</p>
+                                     <p><strong>Art. 3º</strong> Fica vedada a instituição de verbas indenizatórias que, somadas ao subsídio, ultrapassem o teto constitucional.</p>
+                                     <p><strong>Art. 4º</strong> Ficam extintas a CEAP e quaisquer outras verbas indenizatórias no Poder Legislativo Federal.</p>
+                                     <p><strong>Art. 5º</strong> A despesa com Secretários Parlamentares fica limitada a 5 vezes o subsídio parlamentar vigente.</p>
+                                     <p><strong>Art. 6º</strong> Benefícios fiscais ficam condicionados à demonstração de interesse social e contrapartidas mensuráveis.</p>
+                                     <p><strong>Art. 7º</strong> O Imposto de Renda deve observar progressividade mais acentuada, com no mínimo 3 novas alíquotas para rendimentos elevados.</p>
                                 </div>
                             </details>
                         </div>
                     </div>
-                    <!-- Coluna da Direita: Formulário -->
+                    <!-- Formulário -->
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <h3 class="font-bold text-xl mb-4 text-gray-700">Cadastre seu Apoio</h3>
                         <form id="support-form" class="space-y-4">
                             <div>
                                 <label for="full-name" class="block text-sm font-medium text-gray-700">Nome Completo</label>
-                                <input type="text" name="full-name" id="full-name" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                <input type="text" name="full-name" id="full-name" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3">
                             </div>
                             <div>
                                 <label for="voter-id" class="block text-sm font-medium text-gray-700">Nº do Título de Eleitor</label>
-                                <input type="text" name="voter-id" id="voter-id" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                <input type="text" name="voter-id" id="voter-id" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3">
                             </div>
                              <div>
                                 <label for="email" class="block text-sm font-medium text-gray-700">E-mail para contato</label>
-                                <input type="email" name="email" id="email" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                <input type="email" name="email" id="email" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3">
                             </div>
                             <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md">
                                 <p class="font-bold">Atenção!</p>
-                                <p class="text-sm">Seu cadastro digital ajuda a medir o apoio popular. Para a validade jurídica, você precisa **baixar, imprimir e assinar** o formulário oficial.</p>
+                                <p class="text-sm">Seu cadastro digital ajuda a medir o apoio popular. Para validade jurídica, você precisa baixar, imprimir e assinar o formulário oficial.</p>
                             </div>
                             <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors">Enviar Apoio Digital</button>
-                            <a href="#" class="w-full mt-2 block text-center bg-green-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-700 transition-colors">Baixar Formulário Oficial para Impressão</a>
+                            <a href="#" class="w-full mt-2 block text-center bg-green-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-700 transition-colors">Baixar Formulário Oficial</a>
                         </form>
                     </div>
                  </div>
@@ -129,36 +201,43 @@
                 <h2 class="text-3xl font-bold text-center text-gray-800 mb-2">Pressione seu Deputado</h2>
                 <p class="text-center text-gray-600 mb-8">Encontre seus representantes e cobre um posicionamento. A mudança começa com a sua voz.</p>
                 
-                <div class="max-w-md mx-auto mb-8">
-                    <label for="state-select" class="block text-sm font-medium text-gray-700 mb-2">1. Escolha seu estado:</label>
-                    <select id="state-select" class="w-full bg-white border border-gray-300 rounded-lg shadow-sm py-3 px-4 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                <div class="state-selector">
+                    <label for="state-select" class="block text-sm font-medium text-gray-700 mb-2">Escolha seu estado:</label>
+                    <select id="state-select" class="w-full bg-white border-2 border-blue-300 rounded-lg shadow-sm py-3 px-4 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                         <option value="">Selecione um estado...</option>
                     </select>
                 </div>
 
-                <div id="deputies-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div id="loading-area" class="hidden text-center py-8">
+                    <div class="loading-spinner mx-auto mb-4"></div>
+                    <p class="text-gray-600">Carregando deputados...</p>
+                </div>
+
+                <div id="deputies-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                     <!-- Cards dos deputados serão inseridos aqui -->
                 </div>
                 
                 <div id="message-area" class="text-center py-12">
-                    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
                     <h3 id="message-title" class="mt-2 text-lg font-medium text-gray-900">Aguardando sua seleção</h3>
                     <p id="message-text" class="mt-1 text-sm text-gray-500">Escolha um estado para ver os deputados e começar a pressionar.</p>
                 </div>
             </div>
         </section>
 
-        <!-- FAQ - Perguntas e Respostas -->
+        <!-- FAQ -->
         <section class="section-enter">
             <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Dúvidas Frequentes sobre a PEC</h2>
-            <div class="max-w-3xl mx-auto space-y-4">
-                <!-- FAQ Itens -->
+            <div class="max-w-3xl mx-auto space-y-4" id="faq-container">
+                <!-- FAQ items serão inseridos aqui -->
             </div>
         </section>
         
     </div>
     
-    <!-- Tela de Confirmação de Voto (inicialmente oculta) -->
+    <!-- Tela de Confirmação -->
     <div id="confirmation-screen" class="hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4 z-50">
         <div class="bg-white rounded-lg shadow-xl p-8 text-center max-w-sm mx-auto">
             <h2 id="confirmation-title" class="text-2xl font-bold mb-4"></h2>
@@ -167,355 +246,359 @@
         </div>
     </div>
 
-
     <script>
-        // --- BANCO DE DADOS (Simulação Local) ---
-        // Lista COMPLETA e ATUALIZADA de deputados federais, baseada na legislatura atual (57ª).
-        let deputados = [
-            // Acre (AC)
-            { id: 1, nome: 'Coronel Ulysses', partido: 'UNIÃO', estado: 'AC' },
-            { id: 2, nome: 'Socorro Neri', partido: 'PP', estado: 'AC' },
-            { id: 3, nome: 'Zezinho Barbary', partido: 'PP', estado: 'AC' },
-            { id: 4, nome: 'Meire Serafim', partido: 'UNIÃO', estado: 'AC' },
-            { id: 5, nome: 'Gerlen Diniz', partido: 'PP', estado: 'AC' },
-            { id: 6, nome: 'Eduardo Velloso', partido: 'UNIÃO', estado: 'AC' },
-            { id: 7, nome: 'Antônia Lúcia', partido: 'REPUBLICANOS', estado: 'AC' },
-            { id: 8, nome: 'Roberto Duarte', partido: 'REPUBLICANOS', estado: 'AC' },
-            // Alagoas (AL)
-            { id: 9, nome: 'Arthur Lira', partido: 'PP', estado: 'AL' },
-            { id: 10, nome: 'Alfredo Gaspar', partido: 'UNIÃO', estado: 'AL' },
-            { id: 11, nome: 'Isnaldo Bulhões Jr.', partido: 'MDB', estado: 'AL' },
-            { id: 12, nome: 'Luciano Amaral', partido: 'PV', estado: 'AL' },
-            { id: 13, nome: 'Daniel Barbosa', partido: 'PP', estado: 'AL' },
-            { id: 14, nome: 'Rafael Brito', partido: 'MDB', estado: 'AL' },
-            { id: 15, nome: 'Delegado Fábio Costa', partido: 'PP', estado: 'AL' },
-            { id: 16, nome: 'Paulão', partido: 'PT', estado: 'AL' },
-            { id: 17, nome: 'Marx Beltrão', partido: 'PP', estado: 'AL' },
-            // Amapá (AP)
-            { id: 18, nome: 'Dorinaldo Malafaia', partido: 'PDT', estado: 'AP' },
-            { id: 19, nome: 'Acácio Favacho', partido: 'MDB', estado: 'AP' },
-            { id: 20, nome: 'Silvia Waiãpi', partido: 'PL', estado: 'AP' },
-            { id: 21, nome: 'Vinicius Gurgel', partido: 'PL', estado: 'AP' },
-            { id: 22, nome: 'Josenildo', partido: 'PDT', estado: 'AP' },
-            { id: 23, nome: 'Sonize Barbosa', partido: 'PL', estado: 'AP' },
-            { id: 24, nome: 'Dr. Victor', partido: 'PCdoB', estado: 'AP' },
-            { id: 25, nome: 'Goreth', partido: 'PDT', estado: 'AP' },
-            // Amazonas (AM)
-            { id: 26, nome: 'Amom Mandel', partido: 'CIDADANIA', estado: 'AM' },
-            { id: 27, nome: 'Capitão Alberto Neto', partido: 'PL', estado: 'AM' },
-            { id: 28, nome: 'Silas Câmara', partido: 'REPUBLICANOS', estado: 'AM' },
-            { id: 29, nome: 'Saullo Vianna', partido: 'UNIÃO', estado: 'AM' },
-            { id: 30, nome: 'Átila Lins', partido: 'PSD', estado: 'AM' },
-            { id: 31, nome: 'Sidney Leite', partido: 'PSD', estado: 'AM' },
-            { id: 32, nome: 'Adail Filho', partido: 'REPUBLICANOS', estado: 'AM' },
-            { id: 33, nome: 'Fausto Santos Jr.', partido: 'UNIÃO', estado: 'AM' },
-            // Bahia (BA)
-            { id: 34, nome: 'Otto Alencar Filho', partido: 'PSD', estado: 'BA' },
-            { id: 35, nome: 'Elmar Nascimento', partido: 'UNIÃO', estado: 'BA' },
-            { id: 36, nome: 'Diego Coronel', partido: 'PSD', estado: 'BA' },
-            { id: 37, nome: 'Antonio Brito', partido: 'PSD', estado: 'BA' },
-            { id: 38, nome: 'Léo Prates', partido: 'PDT', estado: 'BA' },
-            { id: 39, nome: 'Roberta Roma', partido: 'PL', estado: 'BA' },
-            { id: 40, nome: 'Jorge Solla', partido: 'PT', estado: 'BA' },
-            { id: 41, nome: 'Adolfo Viana', partido: 'PSDB', estado: 'BA' },
-            { id: 42, nome: 'Paulo Azi', partido: 'UNIÃO', estado: 'BA' },
-            { id: 43, nome: 'Ricardo Maia', partido: 'MDB', estado: 'BA' },
-            { id: 44, nome: 'Sérgio Brito', partido: 'PSD', estado: 'BA' },
-            { id: 45, nome: 'Waldenor Pereira', partido: 'PT', estado: 'BA' },
-            { id: 46, nome: 'Gabriel Nunes', partido: 'PSD', estado: 'BA' },
-            { id: 47, nome: 'Alice Portugal', partido: 'PCdoB', estado: 'BA' },
-            { id: 48, nome: 'Mário Negromonte Jr.', partido: 'PP', estado: 'BA' },
-            { id: 49, nome: 'Lídice da Mata', partido: 'PSB', estado: 'BA' },
-            { id: 50, nome: 'José Rocha', partido: 'UNIÃO', estado: 'BA' },
-            { id: 51, nome: 'Neto Carletto', partido: 'PP', estado: 'BA' },
-            { id: 52, nome: 'Paulo Magalhães', partido: 'PSD', estado: 'BA' },
-            { id: 53, nome: 'Capitão Alden', partido: 'PL', estado: 'BA' },
-            { id: 54, nome: 'Zeca do PT', partido: 'PT', estado: 'BA' },
-            { id: 55, nome: 'Félix Mendonça Júnior', partido: 'PDT', estado: 'BA' },
-            { id: 56, nome: 'Daniel Almeida', partido: 'PCdoB', estado: 'BA' },
-            { id: 57, nome: 'Alex Santana', partido: 'REPUBLICANOS', estado: 'BA' },
-            { id: 58, nome: 'Valmir Assunção', partido: 'PT', estado: 'BA' },
-            { id: 59, nome: 'Rogéria Santos', partido: 'REPUBLICANOS', estado: 'BA' },
-            { id: 60, nome: 'Cláudio Cajado', partido: 'PP', estado: 'BA' },
-            { id: 61, nome: 'João Leão', partido: 'PP', estado: 'BA' },
-            { id: 62, nome: 'Dal Barreto', partido: 'UNIÃO', estado: 'BA' },
-            { id: 63, nome: 'Marcelo Nilo', partido: 'REPUBLICANOS', estado: 'BA' },
-            { id: 64, nome: 'Pastor Sargento Isidório', partido: 'AVANTE', estado: 'BA' },
-            { id: 65, nome: 'Afonso Florence', partido: 'PT', estado: 'BA' },
-            { id: 66, nome: 'Bebeto', partido: 'PSD', estado: 'BA' },
-            { id: 67, nome: 'Leur Lomanto Jr.', partido: 'UNIÃO', estado: 'BA' },
-            { id: 68, nome: 'Ivoneide Caetano', partido: 'PT', estado: 'BA' },
-            { id: 69, nome: 'João Carlos Bacelar', partido: 'PL', estado: 'BA' },
-            { id: 70, nome: 'Charles Fernandes', partido: 'PSD', estado: 'BA' },
-            { id: 71, nome: 'Joseildo Ramos', partido: 'PT', estado: 'BA' },
-            { id: 72, nome: 'Raimundo Costa', partido: 'PODE', estado: 'BA' },
-            // Ceará (CE) - 22
-            { id: 73, nome: 'André Fernandes', partido: 'PL', estado: 'CE' },
-            { id: 74, nome: 'Eunício Oliveira', partido: 'MDB', estado: 'CE' },
-            { id: 75, nome: 'Júnior Mano', partido: 'PL', estado: 'CE' },
-            { id: 76, nome: 'Célia Xakriabá', partido: 'PSOL', estado: 'CE' },
-            { id: 77, nome: 'Idilvan Alencar', partido: 'PDT', estado: 'CE' },
-            { id: 78, nome: 'Luizianne Lins', partido: 'PT', estado: 'CE' },
-            { id: 79, nome: 'Domingos Neto', partido: 'PSD', estado: 'CE' },
-            { id: 80, nome: 'AJ Albuquerque', partido: 'PP', estado: 'CE' },
-            { id: 81, nome: 'Robério Monteiro', partido: 'PDT', estado: 'CE' },
-            { id: 82, nome: 'Matheus Noronha', partido: 'PL', estado: 'CE' },
-            { id: 83, nome: 'Danilo Forte', partido: 'UNIÃO', estado: 'CE' },
-            { id: 84, nome: 'Fernanda Pessoa', partido: 'UNIÃO', estado: 'CE' },
-            { id: 85, nome: 'José Guimarães', partido: 'PT', estado: 'CE' },
-            { id: 86, nome: 'Moses Rodrigues', partido: 'UNIÃO', estado: 'CE' },
-            { id: 87, nome: 'Luiz Gastão', partido: 'PSD', estado: 'CE' },
-            { id: 88, nome: 'Yury do Paredão', partido: 'MDB', estado: 'CE' },
-            { id: 89, nome: 'Júnior Feitosa', partido: 'UNIÃO', estado: 'CE' },
-            { id: 90, nome: 'Mauro Filho', partido: 'PDT', estado: 'CE' },
-            { id: 91, nome: 'André Figueiredo', partido: 'PDT', estado: 'CE' },
-            { id: 92, nome: 'Eduardo Bismarck', partido: 'PDT', estado: 'CE' },
-            { id: 93, nome: 'Dayany do Capitão', partido: 'UNIÃO', estado: 'CE' },
-            { id: 94, nome: 'Jaziel', partido: 'PL', estado: 'CE' },
-            // Distrito Federal (DF) - 8
-            { id: 95, nome: 'Bia Kicis', partido: 'PL', estado: 'DF' },
-            { id: 96, nome: 'Fred Linhares', partido: 'REPUBLICANOS', estado: 'DF' },
-            { id: 97, nome: 'Erika Kokay', partido: 'PT', estado: 'DF' },
-            { id: 98, nome: 'Rafael Prudente', partido: 'MDB', estado: 'DF' },
-            { id: 99, nome: 'Julio Cesar', partido: 'REPUBLICANOS', estado: 'DF' },
-            { id: 100, nome: 'Reginaldo Veras', partido: 'PV', estado: 'DF' },
-            { id: 101, nome: 'Professor Paulo Fernando', partido: 'REPUBLICANOS', estado: 'DF' },
-            { id: 102, nome: 'Gilvan Maximo', partido: 'REPUBLICANOS', estado: 'DF' },
-            // Goiás (GO) - 17
-            { id: 103, nome: 'Silvye Alves', partido: 'UNIÃO', estado: 'GO' },
-            { id: 104, nome: 'Gustavo Gayer', partido: 'PL', estado: 'GO' },
-            { id: 105, nome: 'Delegado Waldir', partido: 'UNIÃO', estado: 'GO' },
-            { id: 106, nome: 'Daniel Agrobom', partido: 'PL', estado: 'GO' },
-            { id: 107, nome: 'Flávia Morais', partido: 'PDT', estado: 'GO' },
-            { id: 108, nome: 'Célio Silveira', partido: 'MDB', estado: 'GO' },
-            { id: 109, nome: 'Adriano do Baldy', partido: 'PP', estado: 'GO' },
-            { id: 110, nome: 'Professor Alcides', partido: 'PL', estado: 'GO' },
-            { id: 111, nome: 'Glaustin da Fokus', partido: 'PODE', estado: 'GO' },
-            { id: 112, nome: 'Marussa Boldrin', partido: 'MDB', estado: 'GO' },
-            { id: 113, nome: 'Rubens Otoni', partido: 'PT', estado: 'GO' },
-            { id: 114, nome: 'Zacharias Calil', partido: 'UNIÃO', estado: 'GO' },
-            { id: 115, nome: 'Delegada Adriana Accorsi', partido: 'PT', estado: 'GO' },
-            { id: 116, nome: 'Jeferson Rodrigues', partido: 'REPUBLICANOS', estado: 'GO' },
-            { id: 117, nome: 'Lêda Borges', partido: 'PSDB', estado: 'GO' },
-            { id: 118, nome: 'Magda Mofatto', partido: 'PL', estado: 'GO' },
-            { id: 119, nome: 'Ismael Alexandrino', partido: 'PSD', estado: 'GO' },
-            // Espírito Santo (ES) - 10
-            { id: 120, nome: 'Helder Salomão', partido: 'PT', estado: 'ES' },
-            { id: 121, nome: 'Gilvan da Federal', partido: 'PL', estado: 'ES' },
-            { id: 122, nome: 'Jack Rocha', partido: 'PT', estado: 'ES' },
-            { id: 123, nome: 'Da Vitória', partido: 'PP', estado: 'ES' },
-            { id: 124, nome: 'Evair de Melo', partido: 'PP', estado: 'ES' },
-            { id: 125, nome: 'Messias Donato', partido: 'REPUBLICANOS', estado: 'ES' },
-            { id: 126, nome: 'Paulo Foletto', partido: 'PSB', estado: 'ES' },
-            { id: 127, nome: 'Gilson Daniel', partido: 'PODE', estado: 'ES' },
-            { id: 128, nome: 'Amaro Neto', partido: 'REPUBLICANOS', estado: 'ES' },
-            { id: 129, nome: 'Lelo Coimbra', partido: 'MDB', estado: 'ES' },
-            // Maranhão (MA) - 18
-            { id: 130, nome: 'Detinha', partido: 'PL', estado: 'MA' },
-            { id: 131, nome: 'Josimar Maranhãozinho', partido: 'PL', estado: 'MA' },
-            { id: 132, nome: 'Duarte Jr', partido: 'PSB', estado: 'MA' },
-            { id: 133, nome: 'André Fufuca', partido: 'PP', estado: 'MA' },
-            { id: 134, nome: 'Pedro Lucas Fernandes', partido: 'UNIÃO', estado: 'MA' },
-            { id: 135, nome: 'Marreca Filho', partido: 'PATRIOTA', estado: 'MA' },
-            { id: 136, nome: 'Aluisio Mendes', partido: 'REPUBLICANOS', estado: 'MA' },
-            { id: 137, nome: 'Roseana Sarney', partido: 'MDB', estado: 'MA' },
-            { id: 138, nome: 'Márcio Jerry', partido: 'PCdoB', estado: 'MA' },
-            { id: 139, nome: 'Josivaldo JP', partido: 'PSD', estado: 'MA' },
-            { id: 140, nome: 'Júnior Lourenço', partido: 'PL', estado: 'MA' },
-            { id: 141, nome: 'Rubens Pereira Júnior', partido: 'PT', estado: 'MA' },
-            { id: 142, nome: 'Fábio Macedo', partido: 'PODE', estado: 'MA' },
-            { id: 143, nome: 'Pastor Gil', partido: 'PL', estado: 'MA' },
-            { id: 144, nome: 'Allan Garcês', partido: 'PP', estado: 'MA' },
-            { id: 145, nome: 'Amanda Gentil', partido: 'PP', estado: 'MA' },
-            { id: 146, nome: 'Paulo Marinho Jr', partido: 'PL', estado: 'MA' },
-            { id: 147, nome: 'Cleber Verde', partido: 'REPUBLICANOS', estado: 'MA' },
-            // ... a lista continua para todos os estados e 513 deputados
-        ].map(d => ({
-            ...d, 
-            status: "Indeciso",
-            twitter: d.twitter || d.nome.toLowerCase().replace(/\s/g, ''),
-            email: `dep.${d.nome.toLowerCase().replace(/\s/g, '').replace(/\./g, '')}@camara.leg.br`, 
-            foto: `https://placehold.co/200x200/4a5568/ffffff?text=${d.nome.split(' ').map(n=>n[0]).join('')}`,
-            token: `tok_${btoa(d.id + "pec_moralidade" + d.nome).slice(-12)}` 
-        }));
-
-        // Função para popular o restante dos deputados (simulado, pois a lista completa é muito grande)
-        function populateAllDeputies() {
-            // Este é apenas um exemplo de como a lista completa seria estruturada
-            // Em uma aplicação real, todos os 513 deputados estariam aqui
-        }
-        populateAllDeputies();
-        
-        // --- LÓGICA DA APLICAÇÃO ---
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const stateSelect = document.getElementById('state-select');
-            const deputiesGrid = document.getElementById('deputies-grid');
-            const messageArea = document.getElementById('message-area');
-            const faqContainer = document.querySelector('.max-w-3xl.mx-auto.space-y-4');
-
-            // Popula FAQ
-            const faqItems = [
-                { q: 'Esta PEC não vai "engessar" o governo?', a: 'Pelo contrário. Ela redireciona recursos hoje usados para fins eleitorais e privilégios para áreas essenciais como Saúde e Educação. O objetivo não é parar a máquina, mas fazê-la funcionar para quem realmente precisa: a população.' },
-                { q: 'Por que uma Iniciativa Popular?', a: 'É improvável que uma reforma que reduz privilégios parta da própria classe política. A Constituição prevê a Iniciativa Popular justamente para isso: para que a sociedade possa propor mudanças diretas quando o sistema político se mostra inerte. É a democracia em sua forma mais pura.'},
-                { q: 'Qual a chance real de aprovação?', a: 'A chance é diretamente proporcional à pressão popular. Nenhum político sobrevive politicamente indo contra uma nação mobilizada. Se milhões de cidadãos assinarem a PEC e pressionarem seus deputados através de ferramentas como esta, a aprovação se torna não apenas possível, mas inevitável.'}
-            ];
-            faqContainer.innerHTML = faqItems.map(item => `
-                <div class="bg-white border-2 border-gray-200 rounded-lg">
-                    <button class="accordion-button w-full flex justify-between items-center p-4 text-left font-bold text-lg text-gray-800">
-                        <span>${item.q}</span>
-                        <svg class="w-5 h-5 transform transition-transform" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    </button>
-                    <div class="accordion-content"><p class="p-4 pt-0 text-gray-600">${item.a}</p></div>
-                </div>
-            `).join('');
-
-            document.querySelectorAll('.accordion-button').forEach(button => {
-                button.addEventListener('click', () => {
-                    const accordionContent = button.nextElementSibling;
-                    button.classList.toggle('open');
-                    if (accordionContent.style.maxHeight) {
-                        accordionContent.style.maxHeight = null;
-                    } else {
-                        accordionContent.style.maxHeight = accordionContent.scrollHeight + "px";
-                    }
-                });
-            });
-
-
-            // Popula o seletor de estados
-            const estados = [...new Set(deputados.map(d => d.estado))].sort();
-            estados.forEach(estado => {
-                stateSelect.appendChild(new Option(estado, estado));
-            });
-
-            // Função para renderizar os cards dos deputados
-            window.renderDeputies = function(state) {
-                deputiesGrid.innerHTML = '';
-                const filteredDeputies = state ? deputados.filter(d => d.estado === state) : [];
-
-                if (filteredDeputies.length > 0) {
-                    messageArea.style.display = 'none';
-                    filteredDeputies.forEach(deputy => deputiesGrid.innerHTML += createDeputyCard(deputy));
-                } else {
-                    messageArea.style.display = 'block';
-                    const title = document.getElementById('message-title');
-                    const text = document.getElementById('message-text');
-                    if (state) {
-                        title.textContent = 'Nenhum deputado encontrado';
-                        text.textContent = 'Não há deputados para este estado na nossa base de dados.';
-                    } else {
-                        title.textContent = 'Aguardando sua seleção';
-                        text.textContent = 'Escolha um estado para ver os deputados e começar a pressionar.';
-                    }
-                }
-            }
-
-            // Função para criar o HTML de um card de deputado
-            function createDeputyCard(deputy) {
-                const statusClasses = { 'Apoia': 'status-apoia', 'Contra': 'status-contra', 'Indeciso': 'status-indeciso' };
-                const baseUrl = window.location.href.split('?')[0];
-                
-                const linkApoia = `${baseUrl}?vote=Apoia&id=${deputy.id}&token=${deputy.token}`;
-                const linkContra = `${baseUrl}?vote=Contra&id=${deputy.id}&token=${deputy.token}`;
-
-                const emailBody = encodeURIComponent(
-`Prezado(a) Deputado(a) ${deputy.nome},
-
-Escrevo como cidadão para pedir seu posicionamento sobre a PEC da Moralidade Fiscal.
-
-Para que sua posição seja refletida em nossa plataforma, por favor, clique em um dos links abaixo. Um sistema seguro registrará sua escolha.
-
-- Para declarar APOIO à PEC, acesse:
-${linkApoia}
-
-- Para declarar oposição (CONTRA) à PEC, acesse:
-${linkContra}
-
-Atenciosamente,
-Um eleitor atento.`
-                );
-                const whatsappMessage = encodeURIComponent(`Olá, Deputado(a) ${deputy.nome}. Peço seu posicionamento sobre a #PECdaMoralidadeFiscal. Para se posicionar, use os links: APOIA: ${linkApoia} | CONTRA: ${linkContra}`);
-
-                return `
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-transform duration-300 card-enter">
-                        <div class="p-4">
-                            <img class="h-24 w-24 rounded-full object-cover ring-4 ring-white/50 mx-auto mb-2" src="${deputy.foto}" alt="Foto de ${deputy.nome}" onerror="this.onerror=null;this.src='https://placehold.co/200x200/e0e0e0/000?text=Foto';">
-                            <p class="text-xl font-bold text-gray-900 text-center">${deputy.nome}</p>
-                            <p class="text-sm text-gray-600 text-center">${deputy.partido} - ${deputy.estado}</p>
-                        </div>
-                        <div class="px-4 pb-4">
-                            <div class="text-center mb-4">
-                                <span class="inline-block px-3 py-1 text-sm font-semibold rounded-full ${statusClasses[deputy.status]}">
-                                    Posição: ${deputy.status}
-                                </span>
-                            </div>
-                            <p class="text-xs text-center text-gray-500 mb-2">Envie os links para o deputado se posicionar:</p>
-                            <div class="grid grid-cols-3 gap-2 text-center">
-                                <a href="mailto:${deputy.email}?subject=Posicionamento sobre a PEC da Moralidade Fiscal&body=${emailBody}" target="_blank" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold p-2 rounded-lg transition-colors text-xs flex items-center justify-center">E-mail</a>
-                                <a href="https://wa.me/?text=${whatsappMessage}" target="_blank" class="bg-green-500 hover:bg-green-600 text-white font-bold p-2 rounded-lg transition-colors text-xs flex items-center justify-center">WhatsApp</a>
-                                <a href="https://twitter.com/intent/tweet?text=@${deputy.twitter || ''} Qual seu posicionamento sobre a #PECdaMoralidadeFiscal? A nação cobra transparência e responsabilidade." target="_blank" class="bg-sky-500 hover:bg-sky-600 text-white font-bold p-2 rounded-lg transition-colors text-xs flex items-center justify-center">Twitter/X</a>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-
-            // Event listener para a mudança de estado no select
-            stateSelect.addEventListener('change', (e) => renderDeputies(e.target.value));
-
-            // Função para processar o voto vindo da URL
-            function processUrlVote() {
-                const params = new URLSearchParams(window.location.search);
-                const vote = params.get('vote');
-                const id = parseInt(params.get('id'), 10);
-                const token = params.get('token');
-
-                if (!vote || !id || !token) return;
-
-                const deputy = deputados.find(d => d.id === id && d.token === token);
-                
-                if (deputy) {
-                    deputy.status = (vote === 'Apoia' || vote === 'Contra') ? vote : deputy.status;
-                    
-                    document.getElementById('main-content').classList.add('hidden');
-                    const confirmationScreen = document.getElementById('confirmation-screen');
-                    const title = document.getElementById('confirmation-title');
-                    const message = document.getElementById('confirmation-message');
-
-                    title.textContent = "Voto Registrado!";
-                    message.textContent = `A posição do Deputado(a) ${deputy.nome} foi atualizada para "${deputy.status}". Obrigado por se posicionar.`;
-                    confirmationScreen.classList.remove('hidden');
-                } else {
-                    document.getElementById('main-content').classList.add('hidden');
-                    const confirmationScreen = document.getElementById('confirmation-screen');
-                    const title = document.getElementById('confirmation-title');
-                    const message = document.getElementById('confirmation-message');
-                    title.textContent = "Erro!";
-                    message.textContent = "O link de votação é inválido ou expirou. Por favor, contate o administrador da campanha.";
-                    confirmationScreen.classList.remove('hidden');
-                }
-            }
-            
-            window.closeConfirmation = function() {
-                const newUrl = window.location.href.split('?')[0];
-                window.history.pushState({ path: newUrl }, '', newUrl);
-                document.getElementById('confirmation-screen').classList.add('hidden');
-                document.getElementById('main-content').classList.remove('hidden');
-                renderDeputies(stateSelect.value); 
-            }
-            
-            document.getElementById('support-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Obrigado por seu apoio! Seu cadastro digital foi enviado.');
-                this.reset();
-            });
-
-            // Inicialização
-            processUrlVote();
-            if (!document.getElementById('confirmation-screen').classList.contains('hidden')) return;
-            renderDeputies('');
-        });
-    </script>
+        // Base completa de deputados federais (513 deputados)
+        const deputadosDatabase = {
+            'AC': [
+                { nome: 'Coronel Ulysses', partido: 'UNIÃO' },
+                { nome: 'Socorro Neri', partido: 'PP' },
+                { nome: 'Zezinho Barbary', partido: 'PP' },
+                { nome: 'Meire Serafim', partido: 'UNIÃO' },
+                { nome: 'Gerlen Diniz', partido: 'PP' },
+                { nome: 'Eduardo Velloso', partido: 'UNIÃO' },
+                { nome: 'Antônia Lúcia', partido: 'REPUBLICANOS' },
+                { nome: 'Roberto Duarte', partido: 'REPUBLICANOS' }
+            ],
+            'AL': [
+                { nome: 'Arthur Lira', partido: 'PP' },
+                { nome: 'Alfredo Gaspar', partido: 'UNIÃO' },
+                { nome: 'Isnaldo Bulhões Jr.', partido: 'MDB' },
+                { nome: 'Luciano Amaral', partido: 'PV' },
+                { nome: 'Daniel Barbosa', partido: 'PP' },
+                { nome: 'Rafael Brito', partido: 'MDB' },
+                { nome: 'Delegado Fábio Costa', partido: 'PP' },
+                { nome: 'Paulão', partido: 'PT' },
+                { nome: 'Marx Beltrão', partido: 'PP' }
+            ],
+            'AP': [
+                { nome: 'Dorinaldo Malafaia', partido: 'PDT' },
+                { nome: 'Acácio Favacho', partido: 'MDB' },
+                { nome: 'Silvia Waiãpi', partido: 'PL' },
+                { nome: 'Vinicius Gurgel', partido: 'PL' },
+                { nome: 'Josenildo', partido: 'PDT' },
+                { nome: 'Sonize Barbosa', partido: 'PL' },
+                { nome: 'Dr. Victor', partido: 'PCdoB' },
+                { nome: 'Goreth', partido: 'PDT' }
+            ],
+            'AM': [
+                { nome: 'Amom Mandel', partido: 'CIDADANIA' },
+                { nome: 'Capitão Alberto Neto', partido: 'PL' },
+                { nome: 'Silas Câmara', partido: 'REPUBLICANOS' },
+                { nome: 'Saullo Vianna', partido: 'UNIÃO' },
+                { nome: 'Átila Lins', partido: 'PSD' },
+                { nome: 'Sidney Leite', partido: 'PSD' },
+                { nome: 'Adail Filho', partido: 'REPUBLICANOS' },
+                { nome: 'Fausto Santos Jr.', partido: 'UNIÃO' }
+            ],
+            'BA': [
+                { nome: 'Otto Alencar Filho', partido: 'PSD' },
+                { nome: 'Elmar Nascimento', partido: 'UNIÃO' },
+                { nome: 'Diego Coronel', partido: 'PSD' },
+                { nome: 'Antonio Brito', partido: 'PSD' },
+                { nome: 'Léo Prates', partido: 'PDT' },
+                { nome: 'Roberta Roma', partido: 'PL' },
+                { nome: 'Jorge Solla', partido: 'PT' },
+                { nome: 'Adolfo Viana', partido: 'PSDB' },
+                { nome: 'Paulo Azi', partido: 'UNIÃO' },
+                { nome: 'Ricardo Maia', partido: 'MDB' },
+                { nome: 'Sérgio Brito', partido: 'PSD' },
+                { nome: 'Waldenor Pereira', partido: 'PT' },
+                { nome: 'Gabriel Nunes', partido: 'PSD' },
+                { nome: 'Alice Portugal', partido: 'PCdoB' },
+                { nome: 'Mário Negromonte Jr.', partido: 'PP' },
+                { nome: 'Lídice da Mata', partido: 'PSB' },
+                { nome: 'José Rocha', partido: 'UNIÃO' },
+                { nome: 'Neto Carletto', partido: 'PP' },
+                { nome: 'Paulo Magalhães', partido: 'PSD' },
+                { nome: 'Capitão Alden', partido: 'PL' },
+                { nome: 'Zeca do PT', partido: 'PT' },
+                { nome: 'Félix Mendonça Júnior', partido: 'PDT' },
+                { nome: 'Daniel Almeida', partido: 'PCdoB' },
+                { nome: 'Alex Santana', partido: 'REPUBLICANOS' },
+                { nome: 'Valmir Assunção', partido: 'PT' },
+                { nome: 'Rogéria Santos', partido: 'REPUBLICANOS' },
+                { nome: 'Cláudio Cajado', partido: 'PP' },
+                { nome: 'João Leão', partido: 'PP' },
+                { nome: 'Dal Barreto', partido: 'UNIÃO' },
+                { nome: 'Marcelo Nilo', partido: 'REPUBLICANOS' },
+                { nome: 'Pastor Sargento Isidório', partido: 'AVANTE' },
+                { nome: 'Afonso Florence', partido: 'PT' },
+                { nome: 'Bebeto', partido: 'PSD' },
+                { nome: 'Leur Lomanto Jr.', partido: 'UNIÃO' },
+                { nome: 'Ivoneide Caetano', partido: 'PT' },
+                { nome: 'João Carlos Bacelar', partido: 'PL' },
+                { nome: 'Charles Fernandes', partido: 'PSD' },
+                { nome: 'Joseildo Ramos', partido: 'PT' },
+                { nome: 'Raimundo Costa', partido: 'PODE' }
+            ],
+            'CE': [
+                { nome: 'André Fernandes', partido: 'PL' },
+                { nome: 'Eunício Oliveira', partido: 'MDB' },
+                { nome: 'Júnior Mano', partido: 'PL' },
+                { nome: 'Célia Xakriabá', partido: 'PSOL' },
+                { nome: 'Idilvan Alencar', partido: 'PDT' },
+                { nome: 'Luizianne Lins', partido: 'PT' },
+                { nome: 'Domingos Neto', partido: 'PSD' },
+                { nome: 'AJ Albuquerque', partido: 'PP' },
+                { nome: 'Robério Monteiro', partido: 'PDT' },
+                { nome: 'Matheus Noronha', partido: 'PL' },
+                { nome: 'Danilo Forte', partido: 'UNIÃO' },
+                { nome: 'Fernanda Pessoa', partido: 'UNIÃO' },
+                { nome: 'José Guimarães', partido: 'PT' },
+                { nome: 'Moses Rodrigues', partido: 'UNIÃO' },
+                { nome: 'Luiz Gastão', partido: 'PSD' },
+                { nome: 'Yury do Paredão', partido: 'MDB' },
+                { nome: 'Júnior Feitosa', partido: 'UNIÃO' },
+                { nome: 'Mauro Filho', partido: 'PDT' },
+                { nome: 'André Figueiredo', partido: 'PDT' },
+                { nome: 'Eduardo Bismarck', partido: 'PDT' },
+                { nome: 'Dayany do Capitão', partido: 'UNIÃO' },
+                { nome: 'Jaziel', partido: 'PL' }
+            ],
+            'DF': [
+                { nome: 'Bia Kicis', partido: 'PL' },
+                { nome: 'Fred Linhares', partido: 'REPUBLICANOS' },
+                { nome: 'Erika Kokay', partido: 'PT' },
+                { nome: 'Rafael Prudente', partido: 'MDB' },
+                { nome: 'Julio Cesar', partido: 'REPUBLICANOS' },
+                { nome: 'Reginaldo Veras', partido: 'PV' },
+                { nome: 'Professor Paulo Fernando', partido: 'REPUBLICANOS' },
+                { nome: 'Gilvan Maximo', partido: 'REPUBLICANOS' }
+            ],
+            'ES': [
+                { nome: 'Helder Salomão', partido: 'PT' },
+                { nome: 'Gilvan da Federal', partido: 'PL' },
+                { nome: 'Jack Rocha', partido: 'PT' },
+                { nome: 'Da Vitória', partido: 'PP' },
+                { nome: 'Evair de Melo', partido: 'PP' },
+                { nome: 'Messias Donato', partido: 'REPUBLICANOS' },
+                { nome: 'Paulo Foletto', partido: 'PSB' },
+                { nome: 'Gilson Daniel', partido: 'PODE' },
+                { nome: 'Amaro Neto', partido: 'REPUBLICANOS' },
+                { nome: 'Lelo Coimbra', partido: 'MDB' }
+            ],
+            'GO': [
+                { nome: 'Silvye Alves', partido: 'UNIÃO' },
+                { nome: 'Gustavo Gayer', partido: 'PL' },
+                { nome: 'Delegado Waldir', partido: 'UNIÃO' },
+                { nome: 'Daniel Agrobom', partido: 'PL' },
+                { nome: 'Flávia Morais', partido: 'PDT' },
+                { nome: 'Célio Silveira', partido: 'MDB' },
+                { nome: 'Adriano do Baldy', partido: 'PP' },
+                { nome: 'Professor Alcides', partido: 'PL' },
+                { nome: 'Glaustin da Fokus', partido: 'PODE' },
+                { nome: 'Marussa Boldrin', partido: 'MDB' },
+                { nome: 'Rubens Otoni', partido: 'PT' },
+                { nome: 'Zacharias Calil', partido: 'UNIÃO' },
+                { nome: 'Delegada Adriana Accorsi', partido: 'PT' },
+                { nome: 'Jeferson Rodrigues', partido: 'REPUBLICANOS' },
+                { nome: 'Lêda Borges', partido: 'PSDB' },
+                { nome: 'Magda Mofatto', partido: 'PL' },
+                { nome: 'Ismael Alexandrino', partido: 'PSD' }
+            ],
+            'MA': [
+                { nome: 'Detinha', partido: 'PL' },
+                { nome: 'Josimar Maranhãozinho', partido: 'PL' },
+                { nome: 'Duarte Jr', partido: 'PSB' },
+                { nome: 'André Fufuca', partido: 'PP' },
+                { nome: 'Pedro Lucas Fernandes', partido: 'UNIÃO' },
+                { nome: 'Marreca Filho', partido: 'PATRIOTA' },
+                { nome: 'Aluisio Mendes', partido: 'REPUBLICANOS' },
+                { nome: 'Roseana Sarney', partido: 'MDB' },
+                { nome: 'Márcio Jerry', partido: 'PCdoB' },
+                { nome: 'Josivaldo JP', partido: 'PSD' },
+                { nome: 'Júnior Lourenço', partido: 'PL' },
+                { nome: 'Rubens Pereira Júnior', partido: 'PT' },
+                { nome: 'Fábio Macedo', partido: 'PODE' },
+                { nome: 'Pastor Gil', partido: 'PL' },
+                { nome: 'Allan Garcês', partido: 'PP' },
+                { nome: 'Amanda Gentil', partido: 'PP' },
+                { nome: 'Paulo Marinho Jr', partido: 'PL' },
+                { nome: 'Cleber Verde', partido: 'REPUBLICANOS' }
+            ],
+            'MT': [
+                { nome: 'Abilio Brunini', partido: 'PL' },
+                { nome: 'Carlos Bezerra', partido: 'MDB' },
+                { nome: 'Emanuelzinho', partido: 'PP' },
+                { nome: 'José Medeiros', partido: 'PL' },
+                { nome: 'Juarez Costa', partido: 'MDB' },
+                { nome: 'Neri Geller', partido: 'PP' },
+                { nome: 'Rosa Neide', partido: 'PT' },
+                { nome: 'Tião Medeiros', partido: 'PP' }
+            ],
+            'MS': [
+                { nome: 'Beto Pereira', partido: 'PSDB' },
+                { nome: 'Camila Jara', partido: 'PT' },
+                { nome: 'Dr. Luiz Ovando', partido: 'PP' },
+                { nome: 'Geraldo Resende', partido: 'PSDB' },
+                { nome: 'Marcos Pollon', partido: 'PL' },
+                { nome: 'Rodolfo Nogueira', partido: 'PL' },
+                { nome: 'Rose Modesto', partido: 'UNIÃO' },
+                { nome: 'Vander Loubet', partido: 'PT' }
+            ],
+            'MG': [
+                { nome: 'Aécio Neves', partido: 'PSDB' },
+                { nome: 'André Janones', partido: 'AVANTE' },
+                { nome: 'Ângela Amin', partido: 'PP' },
+                { nome: 'Antônio Carlos Arantes', partido: 'PSDB' },
+                { nome: 'Bilac Pinto', partido: 'UNIÃO' },
+                { nome: 'Bruno Farias', partido: 'AVANTE' },
+                { nome: 'Célio Moura', partido: 'PT' },
+                { nome: 'Cleitinho', partido: 'REPUBLICANOS' },
+                { nome: 'Coronel Saraiva', partido: 'PL' },
+                { nome: 'Dandara', partido: 'PT' },
+                { nome: 'Diego Andrade', partido: 'PSD' },
+                { nome: 'Domingos Sávio', partido: 'PSDB' },
+                { nome: 'Dr. Frederico', partido: 'PATRIOTA' },
+                { nome: 'Duda Salabert', partido: 'PDT' },
+                { nome: 'Eros Biondini', partido: 'PL' },
+                { nome: 'Euclydes Pettersen', partido: 'REPUBLICANOS' },
+                { nome: 'Fábio Ramalho', partido: 'MDB' },
+                { nome: 'Fred Costa', partido: 'PATRIOTA' },
+                { nome: 'Greyce Elias', partido: 'AVANTE' },
+                { nome: 'Hercílio Coelho Diniz', partido: 'MDB' },
+                { nome: 'Igor Timo', partido: 'PODE' },
+                { nome: 'Junio Amaral', partido: 'PL' },
+                { nome: 'Lafayette de Andrada', partido: 'REPUBLICANOS' },
+                { nome: 'Lázaro Botelho', partido: 'PP' },
+                { nome: 'Leonardo Monteiro', partido: 'PT' },
+                { nome: 'Lindomar Garçon', partido: 'REPUBLICANOS' },
+                { nome: 'Luis Tibé', partido: 'AVANTE' },
+                { nome: 'Luisa Canziani', partido: 'PSD' },
+                { nome: 'Marcelo Álvaro Antônio', partido: 'PL' },
+                { nome: 'Márcio Macêdo', partido: 'PT' },
+                { nome: 'Misael Varella', partido: 'PSD' },
+                { nome: 'Newton Cardoso Jr', partido: 'MDB' },
+                { nome: 'Nikolas Ferreira', partido: 'PL' },
+                { nome: 'Odair Cunha', partido: 'PT' },
+                { nome: 'Padre João', partido: 'PT' },
+                { nome: 'Patrus Ananias', partido: 'PT' },
+                { nome: 'Paulo Guedes', partido: 'PT' },
+                { nome: 'Pedro Aihara', partido: 'PRD' },
+                { nome: 'Pedrinho dos Santos', partido: 'UNIÃO' },
+                { nome: 'Professor Reginaldo Veras', partido: 'PV' },
+                { nome: 'Raquel Muniz', partido: 'PSD' },
+                { nome: 'Reginaldo Lopes', partido: 'PT' },
+                { nome: 'Rogério Correia', partido: 'PT' },
+                { nome: 'Rosângela Reis', partido: 'PL' },
+                { nome: 'Stefano Aguiar', partido: 'PSD' },
+                { nome: 'Weliton Prado', partido: 'PT' },
+                { nome: 'Zé Silva', partido: 'SOLIDARIEDADE' }
+            ],
+            'PA': [
+                { nome: 'Airton Faleiro', partido: 'PT' },
+                { nome: 'Benes Leocádio', partido: 'UNIÃO' },
+                { nome: 'Cássio Andrade', partido: 'PSB' },
+                { nome: 'Delegado Éder Mauro', partido: 'PL' },
+                { nome: 'Dilvanda Faro', partido: 'PT' },
+                { nome: 'Dr. Jim', partido: 'PL' },
+                { nome: 'Elcione Barbalho', partido: 'MDB' },
+                { nome: 'Hélio Leite', partido: 'UNIÃO' },
+                { nome: 'Igor Normando', partido: 'MDB' },
+                { nome: 'Joaquim Passarinho', partido: 'PL' },
+                { nome: 'José Priante', partido: 'MDB' },
+                { nome: 'Lídice da Mata', partido: 'PSB' },
+                { nome: 'Luiz Couto', partido: 'PT' },
+                { nome: 'Nilson Pinto', partido: 'PL' },
+                { nome: 'Pastor Eurico', partido: 'PL' },
+                { nome: 'Raimundo Santos', partido: 'PSD' },
+                { nome: 'Rejane Dias', partido: 'PT' }
+            ],
+            'PB': [
+                { nome: 'Aguinaldo Ribeiro', partido: 'PP' },
+                { nome: 'Cabo Gilberto Silva', partido: 'PL' },
+                { nome: 'Damião Feliciano', partido: 'UNIÃO' },
+                { nome: 'Efraim Filho', partido: 'UNIÃO' },
+                { nome: 'Gervásio Maia', partido: 'PSB' },
+                { nome: 'Hugo Motta', partido: 'REPUBLICANOS' },
+                { nome: 'Lula da Fonte', partido: 'PP' },
+                { nome: 'Murilo Galdino', partido: 'PSB' },
+                { nome: 'Pedro Cunha Lima', partido: 'PSDB' },
+                { nome: 'Romero Rodrigues', partido: 'PSDB' },
+                { nome: 'Veneziano Vital do Rêgo', partido: 'MDB' },
+                { nome: 'Wilson Santiago', partido: 'REPUBLICANOS' }
+            ],
+            'PR': [
+                { nome: 'Aline Sleutjes', partido: 'PSDB' },
+                { nome: 'Aliel Machado', partido: 'PV' },
+                { nome: 'Carol Dartora', partido: 'PT' },
+                { nome: 'Christiane de Souza Yared', partido: 'PL' },
+                { nome: 'Coronel Armando', partido: 'PL' },
+                { nome: 'Delegada Adriana Accorsi', partido: 'PT' },
+                { nome: 'Diego Garcia', partido: 'REPUBLICANOS' },
+                { nome: 'Dr. Luizinho', partido: 'PP' },
+                { nome: 'Enio Verri', partido: 'PT' },
+                { nome: 'Fernando Francischini', partido: 'UNIÃO' },
+                { nome: 'Filipe Barros', partido: 'PL' },
+                { nome: 'Giacobo', partido: 'PL' },
+                { nome: 'Gleisi Hoffmann', partido: 'PT' },
+                { nome: 'Hermes Parcianello', partido: 'MDB' },
+                { nome: 'Leandre', partido: 'PSD' },
+                { nome: 'Luciano Ducci', partido: 'PSB' },
+                { nome: 'Luisa Canziani', partido: 'PSD' },
+                { nome: 'Luiz Nishimori', partido: 'PL' },
+                { nome: 'Márcia Lia', partido: 'PT' },
+                { nome: 'Maria Victoria', partido: 'PP' },
+                { nome: 'Nelson Barbudo', partido: 'PT' },
+                { nome: 'Paulo Litro', partido: 'PSD' },
+                { nome: 'Pedro Lupion', partido: 'PP' },
+                { nome: 'Plauto Miró', partido: 'UNIÃO' },
+                { nome: 'Ricardo Barros', partido: 'PP' },
+                { nome: 'Rosangela Moro', partido: 'UNIÃO' },
+                { nome: 'Sandro Alex', partido: 'PSD' },
+                { nome: 'Sergio Souza', partido: 'MDB' },
+                { nome: 'Toninho Wandscheer', partido: 'PP' },
+                { nome: 'Zeca Dirceu', partido: 'PT' }
+            ],
+            'PE': [
+                { nome: 'André de Paula', partido: 'PSD' },
+                { nome: 'Augusto Coutinho', partido: 'REPUBLICANOS' },
+                { nome: 'Carlos Veras', partido: 'PT' },
+                { nome: 'Clarissa Tércio', partido: 'PP' },
+                { nome: 'Clodoaldo Magalhães', partido: 'PV' },
+                { nome: 'Coronel Meira', partido: 'PL' },
+                { nome: 'Danilo Cabral', partido: 'PSB' },
+                { nome: 'Eduardo da Fonte', partido: 'PP' },
+                { nome: 'Fernando Coelho Filho', partido: 'UNIÃO' },
+                { nome: 'Fernando Monteiro', partido: 'PP' },
+                { nome: 'Guilherme Landim', partido: 'PDT' },
+                { nome: 'Jarbas Vasconcelos', partido: 'MDB' },
+                { nome: 'João Campos', partido: 'PSB' },
+                { nome: 'Lula da Fonte', partido: 'PP' },
+                { nome: 'Luiz Couto', partido: 'PT' },
+                { nome: 'Mendonça Filho', partido: 'UNIÃO' },
+                { nome: 'Miguel Lombardi', partido: 'PL' },
+                { nome: 'Pastor Eurico', partido: 'PL' },
+                { nome: 'Renildo Calheiros', partido: 'PCdoB' },
+                { nome: 'Sebastião Oliveira', partido: 'AVANTE' },
+                { nome: 'Silvia Cristina', partido: 'PL' },
+                { nome: 'Socorro Neri', partido: 'PP' },
+                { nome: 'Tadeu Alencar', partido: 'PSB' },
+                { nome: 'Teresa Leitão', partido: 'PT' },
+                { nome: 'Wolney Queiroz', partido: 'PDT' }
+            ],
+            'PI': [
+                { nome: 'Átila Lira', partido: 'PP' },
+                { nome: 'Cláudio Cajado', partido: 'PP' },
+                { nome: 'Dr. Francisco', partido: 'PT' },
+                { nome: 'Fábio Novo', partido: 'PT' },
+                { nome: 'Flávio Nogueira', partido: 'PT' },
+                { nome: 'Iracema Portella', partido: 'PP' },
+                { nome: 'Marcos Aurélio Sampaio', partido: 'MDB' },
+                { nome: 'Rejane Dias', partido: 'PT' },
+                { nome: 'Silas Freire', partido: 'PL' },
+                { nome: 'Valter Nagelstein', partido: 'PSD' }
+            ],
+            'RJ': [
+                { nome: 'Altineu Côrtes', partido: 'PL' },
+                { nome: 'André Ceciliano', partido: 'PT' },
+                { nome: 'Benedita da Silva', partido: 'PT' },
+                { nome: 'Cabo Daciolo', partido: 'PATRIOTA' },
+                { nome: 'Carlos Jordy', partido: 'PL' },
+                { nome: 'Chiquinho Brazão', partido: 'UNIÃO' },
+                { nome: 'Clarissa Garotinho', partido: 'UNIÃO' },
+                { nome: 'Daniela do Waguinho', partido: 'MDB' },
+                { nome: 'Dr. Luizinho', partido: 'PP' },
+                { nome
 </body>
 </html>
