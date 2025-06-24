@@ -117,18 +117,18 @@
                     <!-- Coluna da Direita: Formulário -->
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <h3 class="font-bold text-xl mb-4 text-gray-700">Cadastre seu Apoio</h3>
-                        <form id="support-form" class="space-y-4" target="hidden_iframe" method="POST">
+                        <form id="support-form" class="space-y-4" target="hidden_iframe" method="POST" action="https://docs.google.com/forms/d/e/1FAIpQLSd7M1b85yGHj51fAjeGp0oz0c1PJePoICCWlzUTdrImTY1-5Q/formResponse">
                             <div>
                                 <label for="full-name" class="block text-sm font-medium text-gray-700">Nome Completo</label>
-                                <input type="text" name="entry.2139089829" id="full-name" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                <input type="text" name="entry.110149285" id="full-name" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
                             </div>
                             <div>
                                 <label for="voter-id" class="block text-sm font-medium text-gray-700">Nº do Título de Eleitor</label>
-                                <input type="text" name="entry.1991360863" id="voter-id" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                <input type="text" name="entry.1616386398" id="voter-id" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
                             </div>
                              <div>
                                 <label for="email" class="block text-sm font-medium text-gray-700">E-mail para contato</label>
-                                <input type="email" name="entry.749546084" id="email" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                <input type="email" name="entry.1874652152" id="email" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
                             </div>
                             <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md">
                                 <p class="font-bold">Atenção!</p>
@@ -183,13 +183,6 @@
         window.submitted = false; // Variável de controle global
         
         document.addEventListener('DOMContentLoaded', () => {
-            // --- INFORMAÇÕES DO GOOGLE FORM (PREENCHIDAS COM SEUS DADOS) ---
-            const GOOGLE_FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSc89GmqygDYDm5EVOkYlJJHL0DaHb-itLZZSeNj9aqk61dIzQ/formResponse";
-            
-            // Atribui a URL de ação ao formulário
-            const form = document.getElementById('support-form');
-            form.action = GOOGLE_FORM_ACTION;
-            
             // --- CONSTANTES E VARIÁVEIS GLOBAIS ---
             const deputados_data = [
                  { id: 1, nome: "Abilio Brunini", partido: "PL", estado: "MT" }, { id: 2, nome: "Acácio Favacho", partido: "MDB", estado: "AP" },
