@@ -36,8 +36,11 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         /* Lógica do Acordeão (FAQ) */
         .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out; }
-        .accordion-button.open + .accordion-content { max-height: 1000px; }
+        .accordion-button.open + .accordion-content { max-height: 2500px; /* Aumentado para comportar mais texto */ }
         .accordion-button.open svg { transform: rotate(180deg); }
+        .prose table { width: 100%; border-collapse: collapse; }
+        .prose th, .prose td { border: 1px solid #e2e8f0; padding: 8px; text-align: left; }
+        .prose th { background-color: #f1f5f9; }
     </style>
 </head>
 <body class="text-gray-800">
@@ -53,19 +56,19 @@
 
         <!-- 2. SEÇÃO DE GRÁFICOS -->
         <section class="mb-12 section-enter">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">O Custo do Nosso Parlamento: Uma Realidade Incômoda</h2>
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Os Números do Desperdício</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                <div class="bg-yellow-100/50 border-2 border-yellow-400 p-6 rounded-xl">
-                    <h3 class="text-5xl font-bold text-yellow-700">R$ 3,3 Milhões</h3>
-                    <p class="text-yellow-800 mt-2">É o custo **anual** de um único deputado, segundo estudo do Inst. Millenium, somando subsídio, verbas, auxílios e encargos.</p>
-                </div>
                 <div class="bg-red-100/50 border-2 border-red-400 p-6 rounded-xl">
-                    <h3 class="text-5xl font-bold text-red-700">3x Mais Caro</h3>
-                    <p class="text-red-800 mt-2">O custo do Congresso brasileiro por cidadão é três vezes maior que o do parlamento espanhol e quase o dobro do canadense.</p>
+                    <h3 class="text-5xl font-bold text-red-700">R$ 5 Bilhões</h3>
+                    <p class="text-red-800 mt-2">É o custo aproximado do Fundo Eleitoral, que a PEC propõe reduzir em 90%, limitando o gasto a R$ 500 milhões.</p>
+                </div>
+                <div class="bg-yellow-100/50 border-2 border-yellow-400 p-6 rounded-xl">
+                    <h3 class="text-5xl font-bold text-yellow-700">R$ 400 Bilhões</h3>
+                    <p class="text-yellow-800 mt-2">É o valor estimado das renúncias fiscais anuais. A PEC propõe um teto e uma redução gradual para R$ 100 bilhões.</p>
                 </div>
                 <div class="bg-blue-100/50 border-2 border-blue-300 p-6 rounded-xl">
-                    <h3 class="text-5xl font-bold text-blue-700">R$ 49,6 Bilhões</h3>
-                    <p class="text-blue-800 mt-2">Foi a soma do Fundo Eleitoral (R$4,9 bi) e das Emendas Parlamentares (R$44,7 bi) apenas no orçamento de 2024.</p>
+                    <h3 class="text-5xl font-bold text-blue-700">R$ 4,4 Bilhões</h3>
+                    <p class="text-blue-800 mt-2">É a economia anual estimada apenas com a racionalização dos custos do Congresso Nacional, alinhando-o à média do G20.</p>
                 </div>
             </div>
         </section>
@@ -73,28 +76,84 @@
         <!-- 3. SEÇÃO DE ASSINATURA DA PEC -->
         <section class="mb-12 section-enter">
             <div class="bg-blue-50 border-t-4 border-b-4 border-blue-500 p-8 rounded-2xl shadow-inner">
-                 <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Faça História: Assine a PEC da Moralidade Fiscal</h2>
-                 <p class="text-center text-gray-600 mb-8 max-w-4xl mx-auto">Para que esta proposta chegue ao Congresso, precisamos de 1,5 milhão de assinaturas de eleitores de todo o Brasil. Sua assinatura é uma ferramenta poderosa de mudança. Leia a proposta na íntegra e junte-se a nós.</p>
+                 <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Faça História: Apoie a PEC da Moralidade Fiscal</h2>
+                 <p class="text-center text-gray-600 mb-8 max-w-4xl mx-auto">Para que esta proposta chegue ao Congresso, precisamos mostrar a força da nossa união. Sua assinatura neste movimento é uma ferramenta poderosa de pressão. Leia a proposta na íntegra e junte-se a nós.</p>
 
                  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <!-- Coluna da Esquerda: Texto da PEC -->
                     <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="font-bold text-xl mb-4 text-gray-700">Texto Completo da Proposta</h3>
+                        <h3 class="font-bold text-xl mb-4 text-gray-700">Redação Final da Proposta</h3>
                         <div class="prose max-w-none text-sm text-gray-600">
-                            <h4>PROPOSTA DE EMENDA À CONSTITUIÇÃO Nº ____, DE 2025 (INICIATIVA POPULAR)</h4>
-                            <p><strong>Ementa:</strong> Altera a Constituição Federal e o Ato das Disposições Constitucionais Transitórias para extinguir o financiamento público de campanhas, reformar a aplicação de emendas parlamentares, vedar verbas indenizatórias, limitar os custos com gabinetes no Poder Legislativo, condicionar benefícios fiscais a contrapartidas sociais e determinar maior progressividade no imposto de renda sobre altas rendas.</p>
+                            <h4 class="font-bold">PROPOSTA DE EMENDA À CONSTITUIÇÃO Nº ____, DE 2025 (MOBILIZAÇÃO POPULAR)</h4>
+                            <p><strong>Ementa:</strong> Altera a Constituição Federal para estabelecer limites ao financiamento público de campanhas eleitorais, reformar o sistema de renúncias fiscais, aprimorar a progressividade tributária e racionalizar os custos do Poder Legislativo.</p>
                             <hr class="my-4">
                             <details class="cursor-pointer mt-4">
-                                <summary class="font-semibold text-blue-600 hover:text-blue-800">Clique para ler o texto na íntegra</summary>
-                                <div class="mt-2 text-xs space-y-2">
-                                     <p><strong>Art. 1º</strong> Fica extinto o Fundo Especial de Financiamento de Campanha (FEFC)...</p>
-                                     <p><strong>Art. 2º</strong> O art. 166 da Constituição Federal passa a vigorar com alterações nas emendas individuais...</p>
-                                     <p><strong>Art. 3º</strong> O inciso XI do art. 37 da Constituição Federal passa a vigorar com vedações a verbas extras...</p>
-                                     <p><strong>Art. 4º</strong> Ficam extintas, no âmbito do Poder Legislativo Federal, a Cota para o Exercício da Atividade Parlamentar (CEAP)...</p>
-                                     <p><strong>Art. 5º</strong> A despesa total com a remuneração de Secretários Parlamentares fica limitada...</p>
-                                     <p><strong>Art. 6º</strong> A concessão de benefício fiscal fica condicionada à demonstração de interesse social...</p>
-                                     <p><strong>Art. 7º</strong> A lei que rege o Imposto sobre a Renda deverá observar o princípio da progressividade...</p>
-                                     <p><strong>Art. 8º</strong> Esta Emenda Constitucional entra em vigor na data de sua publicação...</p>
+                                <summary class="font-semibold text-blue-600 hover:text-blue-800">Clique para ler o texto, justificação e impacto</summary>
+                                <div class="mt-4 text-xs space-y-3">
+                                     <p><strong>As Mesas da Câmara dos Deputados e do Senado Federal</strong>, nos termos do § 3º do art. 60 da Constituição Federal, promulgam a seguinte Emenda ao texto constitucional:</p>
+                                     <p><strong>Art. 1º</strong> O art. 17 da Constituição Federal passa a vigorar acrescido do seguinte § 5º:<br>"Art. 17. [...]<br>§ 5º O financiamento público de campanhas eleitorais fica limitado ao valor máximo correspondente a 0,05% (cinco centésimos por cento) da receita corrente líquida da União do exercício anterior, a ser distribuído exclusivamente entre partidos políticos que atendam aos requisitos de funcionamento parlamentar, vedada a destinação direta a candidatos individuais."</p>
+                                     <p><strong>Art. 2º</strong> O art. 51 da Constituição Federal passa a vigorar acrescido do seguinte inciso:<br>"Art. 51. [...]<br>XVIII - estabelecer, por resolução, limites para os custos operacionais totais da Casa, incluindo remunerações, benefícios e estrutura de apoio, observando como parâmetro a média proporcional dos custos dos parlamentos dos países integrantes do G20, considerando o PIB per capita."</p>
+                                     <p><strong>Art. 3º</strong> O art. 52 da Constituição Federal passa a vigorar acrescido do seguinte inciso:<br>"Art. 52. [...]<br>XVIII - estabelecer, por resolução, limites para os custos operacionais totais da Casa, incluindo remunerações, benefícios e estrutura de apoio, observando como parâmetro a média proporcional dos custos dos parlamentos dos países integrantes do G20, considerando o PIB per capita."</p>
+                                     <p><strong>Art. 4º</strong> O § 2º do art. 153 da Constituição Federal passa a vigorar com a seguinte redação, e o artigo fica acrescido do § 4º:<br>"Art. 153. [...]<br>§ 2º [...]<br>I - será informado pelos critérios da generalidade, da universalidade e da progressividade, na forma da lei, assegurada a aplicação de alíquotas progressivas que observem os padrões internacionais de tributação sobre altas rendas;<br>[...]<br>§ 4º A lei que disciplinar o imposto sobre renda e proventos de qualquer natureza estabelecerá:<br>I - alíquotas progressivas para rendimentos superiores a 60 (sessenta) salários mínimos anuais;<br>II - tributação de lucros e dividendos distribuídos, observada a sistemática de integração para evitar dupla tributação;<br>III - faixas de isenção compatíveis com o mínimo existencial."</p>
+                                     <p><strong>Art. 5º</strong> O art. 165 da Constituição Federal passa a vigorar acrescido do seguinte § 10:<br>"Art. 165. [...]<br>§ 10. A concessão de benefícios tributários pela União observará os seguintes princípios:<br>I - demonstração prévia de relevante interesse social ou econômico;<br>II - estabelecimento de contrapartidas mensuráveis em geração de empregos, investimentos sociais ou desenvolvimento regional;<br>III - prazo determinado de vigência, não superior a 5 (cinco) anos, renovável mediante nova avaliação;<br>IV - limite global anual equivalente a 5% (cinco por cento) da receita tributária federal do exercício anterior;<br>V - avaliação bienal de efetividade pelo órgão de controle externo competente."</p>
+                                     <p><strong>Art. 6º</strong> O art. 37 da Constituição Federal passa a vigorar acrescido do seguinte § 15:<br>"Art. 37. [...]<br>§ 15. Os benefícios, auxílios e verbas de qualquer natureza destinados a agentes políticos e detentores de mandato eletivo deverão:<br>I - ter previsão legal específica com justificativa de necessidade;<br>II - observar o princípio da razoabilidade e proporcionalidade;<br>III - ser objeto de divulgação mensal em portal de transparência;<br>IV - limitar-se ao estritamente necessário ao exercício da função pública."</p>
+                                     <p><strong>Art. 7º</strong> O Ato das Disposições Constitucionais Transitórias passa a vigorar acrescido dos seguintes artigos:<br>"Art. 120. A adequação aos limites estabelecidos nesta Emenda observará o seguinte cronograma:<br>I - financiamento eleitoral: aplicação imediata às eleições posteriores a 2026;<br>II - renúncias fiscais: redução gradual em 20% (vinte por cento) ao ano, atingindo o limite em 5 (cinco) exercícios;<br>III - progressividade tributária: regulamentação por lei complementar no prazo de 12 (doze) meses;<br>IV - custos legislativos: adequação no prazo de 24 (vinte e quatro) meses.<br>Art. 121. Os benefícios fiscais vigentes na data de promulgação desta Emenda permanecerão válidos pelo prazo originalmente estabelecido, limitado a 5 (cinco) anos, devendo sua renovação observar os novos critérios estabelecidos no § 10 do art. 165."</p>
+                                     <p><strong>Art. 8º</strong> Esta Emenda Constitucional entra em vigor na data de sua publicação.</p>
+                                     
+                                     <hr class="my-6">
+                                     
+                                     <h5 class="font-bold text-lg mb-2">Justificação</h5>
+                                     <p>A presente Proposta de Emenda à Constituição visa modernizar e racionalizar aspectos fundamentais da gestão pública brasileira, alinhando o país às melhores práticas internacionais de governança fiscal e transparência política.</p>
+                                     <p class="font-bold mt-2">Objetivos principais:</p>
+                                     <ul class="list-disc list-inside">
+                                        <li>Redução do financiamento público eleitoral de aproximadamente 5 bilhões para aproximadamente R$ 500 milhões anuais.</li>
+                                        <li>Limitação das renúncias fiscais de cerca de R$ 400 bilhões para R$ 100 bilhões em 5 anos.</li>
+                                        <li>Aprimoramento da progressividade tributária com alíquotas para altas rendas similares aos países da OCDE.</li>
+                                        <li>Racionalização dos custos legislativos equiparando-os à média dos parlamentos do G20.</li>
+                                     </ul>
+                                     <p class="mt-2">A proposta respeita integralmente os princípios constitucionais, estabelece transições graduais e cria mecanismos efetivos de controle e transparência.</p>
+
+                                     <hr class="my-6">
+
+                                     <h5 class="font-bold text-lg mb-2">Análise do Impacto Financeiro - Artigos 2º e 3º</h5>
+                                     <p><strong>Cenário Atual - Custos do Congresso Nacional (2024)</strong></p>
+                                     <p>Câmara: R$ 6,2 bi (Custo por deputado/ano: R$ 12,1 mi)</p>
+                                     <p>Senado: R$ 4,8 bi (Custo por senador/ano: R$ 59,3 mi)</p>
+                                     <p>Total Congresso: R$ 11 bilhões/ano</p>
+                                     
+                                     <h6 class="font-bold mt-4">Benchmarking Internacional - Parlamentos G20</h6>
+                                     <table>
+                                        <thead>
+                                            <tr><th>País</th><th>Custo Parlamento (% PIB)</th><th>Custo per capita</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>Brasil</td><td>0,11%</td><td>R$ 51,40</td></tr>
+                                            <tr><td>Alemanha</td><td>0,04%</td><td>R$ 28,20</td></tr>
+                                            <tr><td>França</td><td>0,05%</td><td>R$ 31,50</td></tr>
+                                            <tr><td>Canadá</td><td>0,06%</td><td>R$ 35,80</td></tr>
+                                            <tr><td><strong>Média G20</strong></td><td><strong>0,06%</strong></td><td><strong>R$ 31,25</strong></td></tr>
+                                        </tbody>
+                                     </table>
+
+                                     <h6 class="font-bold mt-4">Projeção de Economia com a PEC</h6>
+                                     <p>Meta: Equiparação à Média G20 (0,06% do PIB)</p>
+                                     <p>Custo atual: 0,11% do PIB (R$ 11 bilhões)</p>
+                                     <p>Meta G20: 0,06% do PIB (R$ 6,6 bilhões)</p>
+                                     <p class="font-bold text-green-700">Economia potencial: R$ 4,4 bilhões/ano</p>
+
+                                     <h6 class="font-bold mt-4">Impacto Acumulado em 10 Anos</h6>
+                                     <p>Ano 1 (transição): R$ 2,2 bilhões</p>
+                                     <p>Anos 2-10: R$ 39,6 bilhões (R$ 4,4 bi x 9)</p>
+                                     <p class="font-bold text-green-700">Total em 10 anos: R$ 41,8 bilhões</p>
+
+                                     <h6 class="font-bold mt-4">Resumo Executivo</h6>
+                                     <ul class="list-disc list-inside">
+                                        <li>Economia Anual Efetiva: R$ 4,4 bilhões</li>
+                                        <li>Economia Acumulada (10 anos): R$ 41,8 bilhões</li>
+                                        <li>Redução de Custos: 40% do orçamento atual</li>
+                                        <li>Alinhamento Internacional: Equiparação à média G20</li>
+                                     </ul>
+
                                 </div>
                             </details>
                         </div>
@@ -175,7 +234,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- BANCO DE DADOS COMPLETO ---
-            // A lista completa de deputados é definida aqui, garantindo que esteja disponível quando o script rodar.
             const deputados_data = [
                 { id: 1, nome: "Abilio Brunini", partido: "PL", estado: "MT" }, { id: 2, nome: "Acácio Favacho", partido: "MDB", estado: "AP" },
                 { id: 3, nome: "Adail Filho", partido: "REPUBLICANOS", estado: "AM" }, { id: 4, nome: "Adilson Barroso", partido: "PL", estado: "SP" },
@@ -223,7 +281,7 @@
                 { id: 94, nome: "Coronel Fernanda", partido: "PL", estado: "MT" }, { id: 95, nome: "Coronel Meira", partido: "PL", estado: "PE" },
                 { id: 96, nome: "Coronel Telhada", partido: "PP", estado: "SP" }, { id: 97, nome: "Coronel Ulysses", partido: "UNIÃO", estado: "AC" },
                 { id: 98, nome: "Covatti Filho", partido: "PP", estado: "RS" }, { id: 99, nome: "Da Vitoria", partido: "PP", estado: "ES" },
-                { id: 100, nome: "Dagoberto Nogueira", partido: "PSDB", estado: "MS" }, { id: 101, nome: "Dal Barreto", partido: "UNIÃO", estado: "BA" },
+                { id: 100, nome: "Dagoberto Nogueira", partido: "PSDB", estado: "MS" }, { id: 101, nome: "Dal Barreto", partido: "UNIÃO", "estado": "BA" },
                 { id: 102, nome: "Damião Feliciano", partido: "UNIÃO", estado: "PB" }, { id: 103, nome: "Daniel Agrobom", partido: "PL", estado: "GO" },
                 { id: 104, nome: "Daniel Almeida", partido: "PCdoB", estado: "BA" }, { id: 105, nome: "Daniel Barbosa", partido: "PP", estado: "AL" },
                 { id: 106, nome: "Daniel Freitas", partido: "PL", estado: "SC" }, { id: 107, nome: "Daniel Trzeciak", partido: "PSDB", estado: "RS" },
@@ -242,7 +300,7 @@
                 { id: 134, nome: "Dimas Gadelha", partido: "PT", estado: "RJ" }, { id: 135, nome: "Domingos Neto", partido: "PSD", estado: "CE" },
                 { id: 136, nome: "Domingos Sávio", partido: "PL", estado: "MG" }, { id: 137, nome: "Dorinaldo Malafaia", partido: "PDT", estado: "AP" },
                 { id: 138, nome: "Dr. Allan Garcês", partido: "PP", estado: "MA" }, { id: 140, nome: "Dr. Damião", partido: "UNIÃO", estado: "PB" },
-                { id: 141, nome: "Dr. Frederico", partido: "PATRIOTA", estado: "MG" }, { id: 142, nome: "Dr. Francisco", partido: "PT", estado: "PI" },
+                { id: 141, nome: "Dr. Frederico", partido: "PATRIOTA", estado: "MG" }, { id: 142, nome: "Dr. Francisco", partido: "PT", "estado": "PI" },
                 { id: 143, nome: "Dr. Jaziel", partido: "PL", estado: "CE" }, { id: 145, nome: "Dr. Luiz Ovando", partido: "PP", estado: "MS" },
                 { id: 146, nome: "Dr. Luizinho", partido: "PP", estado: "RJ" }, { id: 148, nome: "Dra. Alessandra Haber", partido: "MDB", estado: "PA" },
                 { id: 149, nome: "Dra. Maria", partido: "PT", estado: "ES" }, { id: 150, nome: "Duarte", partido: "PSB", estado: "MA" },
@@ -441,9 +499,13 @@
             // Popula o contêiner do FAQ
             function populateFaq() {
                 const faqItems = [
-                    { q: 'Esta PEC não vai "engessar" o governo?', a: 'Pelo contrário. Ela redireciona recursos hoje usados para fins eleitorais e privilégios para áreas essenciais como Saúde e Educação...' },
-                    { q: 'Por que uma Iniciativa Popular?', a: 'É improvável que uma reforma que reduz privilégios parta da própria classe política. A Iniciativa Popular é a democracia em sua forma mais pura.'},
-                    { q: 'Qual a chance real de aprovação?', a: 'A chance é diretamente proporcional à pressão popular. Com milhões de assinaturas e pressão constante, a aprovação se torna inevitável.'}
+                    { q: 'Por que um movimento de mobilização popular?', a: 'Embora cidadãos não possam propor uma Emenda à Constituição (PEC) diretamente, a Constituição nos dá o poder de nos manifestar e pressionar. Este movimento serve para mostrar aos parlamentares que há um apoio massivo da sociedade a esta pauta. Com milhões de assinaturas, a classe política não poderá ignorar o clamor por mudança.' },
+                    { q: 'O que o Art. 1º (Limite ao Fundo Eleitoral) faz na prática?', a: 'Reduz o gasto público com campanhas em 90%, limitando o "Fundão Eleitoral" a 0,05% da receita da União. Isso força os partidos a serem mais eficientes e buscarem apoio direto da sociedade, em vez de dependerem de bilhões em dinheiro público.' },
+                    { q: 'O que os Art. 2º e 3º (Racionalização do Congresso) fazem na prática?', a: 'Obrigam a Câmara e o Senado a definirem um teto para seus próprios gastos, usando como base a média de custos dos parlamentos de países do G20. O objetivo é acabar com o inchaço e o desperdício, gerando uma economia anual estimada em R$ 4,4 bilhões.' },
+                    { q: 'O que o Art. 4º (Justiça Tributária) faz na prática?', a: 'Cria um sistema de Imposto de Renda mais justo: 1) Garante que quem ganha mais, pague alíquotas maiores, como em países desenvolvidos. 2) Acaba com a isenção sobre lucros e dividendos, que hoje beneficia apenas os mais ricos. 3) Protege os mais pobres com uma faixa de isenção clara.' },
+                    { q: 'O que o Art. 5º (Teto para Isenções Fiscais) faz na prática?', a: 'Este artigo cria um teto de gastos para as renúncias fiscais, limitando o total de benefícios que a União pode conceder a 5% da arrecadação. Impede que o governo abra mão de receitas de forma descontrolada e exige que toda isenção tenha prazo, meta e seja fiscalizada.' },
+                    { q: 'O que o Art. 6º (Transparência nos Benefícios de Políticos) faz na prática?', a: 'Acaba com a farra dos "penduricalhos" e benefícios secretos. Qualquer auxílio pago a um político precisará ter uma justificativa clara, ser razoável e, principalmente, ser divulgado em detalhes no portal da transparência.' },
+                    { q: 'O que o Art. 7º (Cronograma de Transição) faz na prática?', a: 'Estabelece prazos claros para que todas essas mudanças entrem em vigor. Define um cronograma de 1 a 5 anos para que o governo e o Congresso se adaptem, garantindo que a PEC não fique só no papel e seja implementada de forma gradual e segura.' }
                 ];
                 document.getElementById('faq-container').innerHTML = faqItems.map(item => `
                     <div class="bg-white border-2 border-gray-200 rounded-lg">
