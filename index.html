@@ -13,7 +13,6 @@
             font-family: 'Inter', sans-serif;
             background-color: #f0f2f5;
         }
-        /* Efeito de fundo com a bandeira do Brasil */
         body::before {
             content: '';
             position: fixed;
@@ -27,23 +26,35 @@
             opacity: 0.10;
             z-index: -1;
         }
-        /* Classes de status para os deputados */
         .status-apoia { background-color: #dcfce7; color: #166534; border: 1px solid #16a34a; }
         .status-contra { background-color: #fee2e2; color: #991b1b; border: 1px solid #ef4444; }
         .status-indeciso { background-color: #fef9c3; color: #854d0e; border: 1px solid #facc15; }
-        /* Animações de entrada */
         .card-enter, .section-enter { animation: fadeIn 0.8s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        /* Lógica do Acordeão (FAQ) */
         .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out; }
-        .accordion-button.open + .accordion-content { max-height: 2500px; /* Aumentado para comportar mais texto */ }
+        .accordion-button.open + .accordion-content { max-height: 2500px; }
         .accordion-button.open svg { transform: rotate(180deg); }
         .prose table { width: 100%; border-collapse: collapse; }
         .prose th, .prose td { border: 1px solid #e2e8f0; padding: 8px; text-align: left; }
         .prose th { background-color: #f1f5f9; }
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3b82f6;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="text-gray-800">
+
+    <!-- Iframe oculto para submissão do formulário sem redirecionamento -->
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(window.submitted) { window.handleFormSuccess(); }"></iframe>
 
     <!-- Container principal -->
     <div id="main-content" class="container mx-auto max-w-6xl my-8 p-6 md:p-10 bg-white/95 rounded-2xl shadow-2xl">
@@ -84,7 +95,7 @@
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <h3 class="font-bold text-xl mb-4 text-gray-700">Redação Final da Proposta</h3>
                         <div class="prose max-w-none text-sm text-gray-600">
-                            <h4 class="font-bold">PROPOSTA DE EMENDA À CONSTITUIÇÃO Nº ____, DE 2025 (MOBILIZAÇÃO POPULAR)</h4>
+                             <h4 class="font-bold">PROPOSTA DE EMENDA À CONSTITUIÇÃO Nº ____, DE 2025 (MOBILIZAÇÃO POPULAR)</h4>
                             <p><strong>Ementa:</strong> Altera a Constituição Federal para estabelecer limites ao financiamento público de campanhas eleitorais, reformar o sistema de renúncias fiscais, aprimorar a progressividade tributária e racionalizar os custos do Poder Legislativo.</p>
                             <hr class="my-4">
                             <details class="cursor-pointer mt-4">
@@ -99,61 +110,6 @@
                                      <p><strong>Art. 6º</strong> O art. 37 da Constituição Federal passa a vigorar acrescido do seguinte § 15:<br>"Art. 37. [...]<br>§ 15. Os benefícios, auxílios e verbas de qualquer natureza destinados a agentes políticos e detentores de mandato eletivo deverão:<br>I - ter previsão legal específica com justificativa de necessidade;<br>II - observar o princípio da razoabilidade e proporcionalidade;<br>III - ser objeto de divulgação mensal em portal de transparência;<br>IV - limitar-se ao estritamente necessário ao exercício da função pública."</p>
                                      <p><strong>Art. 7º</strong> O Ato das Disposições Constitucionais Transitórias passa a vigorar acrescido dos seguintes artigos:<br>"Art. 120. A adequação aos limites estabelecidos nesta Emenda observará o seguinte cronograma:<br>I - financiamento eleitoral: aplicação imediata às eleições posteriores a 2026;<br>II - renúncias fiscais: redução gradual em 20% (vinte por cento) ao ano, atingindo o limite em 5 (cinco) exercícios;<br>III - progressividade tributária: regulamentação por lei complementar no prazo de 12 (doze) meses;<br>IV - custos legislativos: adequação no prazo de 24 (vinte e quatro) meses.<br>Art. 121. Os benefícios fiscais vigentes na data de promulgação desta Emenda permanecerão válidos pelo prazo originalmente estabelecido, limitado a 5 (cinco) anos, devendo sua renovação observar os novos critérios estabelecidos no § 10 do art. 165."</p>
                                      <p><strong>Art. 8º</strong> Esta Emenda Constitucional entra em vigor na data de sua publicação.</p>
-                                     
-                                     <hr class="my-6">
-                                     
-                                     <h5 class="font-bold text-lg mb-2">Justificação</h5>
-                                     <p>A presente Proposta de Emenda à Constituição visa modernizar e racionalizar aspectos fundamentais da gestão pública brasileira, alinhando o país às melhores práticas internacionais de governança fiscal e transparência política.</p>
-                                     <p class="font-bold mt-2">Objetivos principais:</p>
-                                     <ul class="list-disc list-inside">
-                                        <li>Redução do financiamento público eleitoral de aproximadamente 5 bilhões para aproximadamente R$ 500 milhões anuais.</li>
-                                        <li>Limitação das renúncias fiscais de cerca de R$ 400 bilhões para R$ 100 bilhões em 5 anos.</li>
-                                        <li>Aprimoramento da progressividade tributária com alíquotas para altas rendas similares aos países da OCDE.</li>
-                                        <li>Racionalização dos custos legislativos equiparando-os à média dos parlamentos do G20.</li>
-                                     </ul>
-                                     <p class="mt-2">A proposta respeita integralmente os princípios constitucionais, estabelece transições graduais e cria mecanismos efetivos de controle e transparência.</p>
-
-                                     <hr class="my-6">
-
-                                     <h5 class="font-bold text-lg mb-2">Análise do Impacto Financeiro - Artigos 2º e 3º</h5>
-                                     <p><strong>Cenário Atual - Custos do Congresso Nacional (2024)</strong></p>
-                                     <p>Câmara: R$ 6,2 bi (Custo por deputado/ano: R$ 12,1 mi)</p>
-                                     <p>Senado: R$ 4,8 bi (Custo por senador/ano: R$ 59,3 mi)</p>
-                                     <p>Total Congresso: R$ 11 bilhões/ano</p>
-                                     
-                                     <h6 class="font-bold mt-4">Benchmarking Internacional - Parlamentos G20</h6>
-                                     <table>
-                                        <thead>
-                                            <tr><th>País</th><th>Custo Parlamento (% PIB)</th><th>Custo per capita</th></tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr><td>Brasil</td><td>0,11%</td><td>R$ 51,40</td></tr>
-                                            <tr><td>Alemanha</td><td>0,04%</td><td>R$ 28,20</td></tr>
-                                            <tr><td>França</td><td>0,05%</td><td>R$ 31,50</td></tr>
-                                            <tr><td>Canadá</td><td>0,06%</td><td>R$ 35,80</td></tr>
-                                            <tr><td><strong>Média G20</strong></td><td><strong>0,06%</strong></td><td><strong>R$ 31,25</strong></td></tr>
-                                        </tbody>
-                                     </table>
-
-                                     <h6 class="font-bold mt-4">Projeção de Economia com a PEC</h6>
-                                     <p>Meta: Equiparação à Média G20 (0,06% do PIB)</p>
-                                     <p>Custo atual: 0,11% do PIB (R$ 11 bilhões)</p>
-                                     <p>Meta G20: 0,06% do PIB (R$ 6,6 bilhões)</p>
-                                     <p class="font-bold text-green-700">Economia potencial: R$ 4,4 bilhões/ano</p>
-
-                                     <h6 class="font-bold mt-4">Impacto Acumulado em 10 Anos</h6>
-                                     <p>Ano 1 (transição): R$ 2,2 bilhões</p>
-                                     <p>Anos 2-10: R$ 39,6 bilhões (R$ 4,4 bi x 9)</p>
-                                     <p class="font-bold text-green-700">Total em 10 anos: R$ 41,8 bilhões</p>
-
-                                     <h6 class="font-bold mt-4">Resumo Executivo</h6>
-                                     <ul class="list-disc list-inside">
-                                        <li>Economia Anual Efetiva: R$ 4,4 bilhões</li>
-                                        <li>Economia Acumulada (10 anos): R$ 41,8 bilhões</li>
-                                        <li>Redução de Custos: 40% do orçamento atual</li>
-                                        <li>Alinhamento Internacional: Equiparação à média G20</li>
-                                     </ul>
-
                                 </div>
                             </details>
                         </div>
@@ -161,24 +117,27 @@
                     <!-- Coluna da Direita: Formulário -->
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <h3 class="font-bold text-xl mb-4 text-gray-700">Cadastre seu Apoio</h3>
-                        <form id="support-form" class="space-y-4">
+                        <form id="support-form" class="space-y-4" target="hidden_iframe" method="POST">
                             <div>
                                 <label for="full-name" class="block text-sm font-medium text-gray-700">Nome Completo</label>
-                                <input type="text" name="full-name" id="full-name" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                <input type="text" name="entry.2139089829" id="full-name" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
                             </div>
                             <div>
                                 <label for="voter-id" class="block text-sm font-medium text-gray-700">Nº do Título de Eleitor</label>
-                                <input type="text" name="voter-id" id="voter-id" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                <input type="text" name="entry.1991360863" id="voter-id" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
                             </div>
                              <div>
                                 <label for="email" class="block text-sm font-medium text-gray-700">E-mail para contato</label>
-                                <input type="email" name="email" id="email" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                <input type="email" name="entry.749546084" id="email" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
                             </div>
                             <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md">
                                 <p class="font-bold">Atenção!</p>
                                 <p class="text-sm">Seu cadastro digital ajuda a medir o apoio popular. Para a validade jurídica, você precisa **baixar, imprimir e assinar** o formulário oficial.</p>
                             </div>
-                            <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors">Enviar Apoio Digital</button>
+                             <button type="submit" id="submit-button" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center">
+                                <span id="button-text">Enviar Apoio Digital</span>
+                                <div id="button-loader" class="loader hidden"></div>
+                            </button>
                             <a href="#" class="w-full mt-2 block text-center bg-green-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-700 transition-colors">Baixar Formulário Oficial para Impressão</a>
                         </form>
                     </div>
@@ -186,23 +145,18 @@
             </div>
         </section>
 
-        <!-- 4. FERRAMENTA DE PRESSÃO -->
+        <!-- (Resto do HTML igual ao anterior) -->
         <section class="mb-12 section-enter">
             <div class="bg-gray-50 p-8 rounded-2xl shadow-inner">
                 <h2 class="text-3xl font-bold text-center text-gray-800 mb-2">Pressione seu Deputado</h2>
                 <p class="text-center text-gray-600 mb-8">Encontre seus representantes e cobre um posicionamento. A mudança começa com a sua voz.</p>
-                
                 <div class="max-w-md mx-auto mb-8">
                     <label for="state-select" class="block text-sm font-medium text-gray-700 mb-2">1. Escolha seu estado:</label>
                     <select id="state-select" class="w-full bg-white border border-gray-300 rounded-lg shadow-sm py-3 px-4 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                         <option value="">Selecione um estado...</option>
                     </select>
                 </div>
-
-                <div id="deputies-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <!-- Cards dos deputados serão inseridos aqui -->
-                </div>
-                
+                <div id="deputies-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
                 <div id="message-area" class="text-center py-12">
                     <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                     <h3 id="message-title" class="mt-2 text-lg font-medium text-gray-900">Aguardando sua seleção</h3>
@@ -210,18 +164,12 @@
                 </div>
             </div>
         </section>
-
-        <!-- 5. FAQ - Perguntas e Respostas -->
         <section class="section-enter">
             <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Dúvidas Frequentes sobre a PEC</h2>
-            <div id="faq-container" class="max-w-3xl mx-auto space-y-4">
-                <!-- Itens do FAQ serão inseridos aqui -->
-            </div>
+            <div id="faq-container" class="max-w-3xl mx-auto space-y-4"></div>
         </section>
-        
     </div>
     
-    <!-- TELA DE MODAL/CONFIRMAÇÃO -->
     <div id="confirmation-screen" class="hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4 z-50">
         <div class="bg-white rounded-lg shadow-xl p-8 text-center max-w-sm mx-auto transform transition-all" id="modal-content">
             <h2 id="confirmation-title" class="text-2xl font-bold mb-4"></h2>
@@ -231,11 +179,20 @@
     </div>
 
 
-    <script>
+    <script type="module">
+        window.submitted = false; // Variável de controle global
+        
         document.addEventListener('DOMContentLoaded', () => {
-            // --- BANCO DE DADOS COMPLETO ---
+            // --- INFORMAÇÕES DO GOOGLE FORM (PREENCHIDAS COM SEUS DADOS) ---
+            const GOOGLE_FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSc89GmqygDYDm5EVOkYlJJHL0DaHb-itLZZSeNj9aqk61dIzQ/formResponse";
+            
+            // Atribui a URL de ação ao formulário
+            const form = document.getElementById('support-form');
+            form.action = GOOGLE_FORM_ACTION;
+            
+            // --- CONSTANTES E VARIÁVEIS GLOBAIS ---
             const deputados_data = [
-                { id: 1, nome: "Abilio Brunini", partido: "PL", estado: "MT" }, { id: 2, nome: "Acácio Favacho", partido: "MDB", estado: "AP" },
+                 { id: 1, nome: "Abilio Brunini", partido: "PL", estado: "MT" }, { id: 2, nome: "Acácio Favacho", partido: "MDB", estado: "AP" },
                 { id: 3, nome: "Adail Filho", partido: "REPUBLICANOS", estado: "AM" }, { id: 4, nome: "Adilson Barroso", partido: "PL", estado: "SP" },
                 { id: 5, nome: "Adolfo Viana", partido: "PSDB", estado: "BA" }, { id: 6, nome: "Adriana Ventura", partido: "NOVO", estado: "SP" },
                 { id: 7, nome: "Adriano do Baldy", partido: "PP", estado: "GO" }, { id: 8, nome: "Afonso Florence", partido: "PT", estado: "BA" },
@@ -582,7 +539,7 @@
                     </div>`;
             }
             
-            // --- Funções do Modal ---
+            // --- Funções do Modal e Formulário ---
             function showConfirmation(title, message) {
                 document.getElementById('confirmation-title').textContent = title;
                 document.getElementById('confirmation-message').textContent = message;
@@ -598,6 +555,34 @@
                     window.history.pushState({ path: newUrl }, '', newUrl);
                     renderDeputies(document.getElementById('state-select').value); 
                 }
+            }
+
+            window.handleFormSuccess = function() {
+                window.submitted = false; // Reseta o controle
+                const form = document.getElementById('support-form');
+                const submitButton = document.getElementById('submit-button');
+                const buttonText = document.getElementById('button-text');
+                const buttonLoader = document.getElementById('button-loader');
+
+                showConfirmation('Apoio Registrado!', 'Obrigado! Seu apoio foi enviado com sucesso. Você receberá uma notificação por e-mail em breve.');
+                form.reset();
+
+                buttonText.classList.remove('hidden');
+                buttonLoader.classList.add('hidden');
+                submitButton.disabled = false;
+            };
+
+            function handleFormSubmit(event) {
+                // Não previne o default, pois queremos que o form envie para o iframe
+                window.submitted = true; // Ativa o controle
+                
+                const submitButton = document.getElementById('submit-button');
+                const buttonText = document.getElementById('button-text');
+                const buttonLoader = document.getElementById('button-loader');
+
+                buttonText.classList.add('hidden');
+                buttonLoader.classList.remove('hidden');
+                submitButton.disabled = true;
             }
 
             // Função para processar o voto vindo da URL
@@ -641,11 +626,7 @@
             }
            
             document.getElementById('state-select').addEventListener('change', (e) => renderDeputies(e.target.value));
-            document.getElementById('support-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                showConfirmation('Apoio Enviado!', 'Obrigado por seu apoio! Não se esqueça de baixar o formulário físico.');
-                this.reset();
-            });
+            document.getElementById('support-form').addEventListener('submit', handleFormSubmit);
         });
     </script>
 </body>
