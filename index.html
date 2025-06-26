@@ -53,9 +53,6 @@
 </head>
 <body class="text-gray-800">
 
-    <!-- Iframe oculto para submissão do formulário sem redirecionamento -->
-    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(window.submitted) { window.handleFormSuccess(); }"></iframe>
-
     <!-- Container principal -->
     <div id="main-content" class="container mx-auto max-w-6xl my-8 p-6 md:p-10 bg-white/95 rounded-2xl shadow-2xl">
 
@@ -117,24 +114,25 @@
                     <!-- Coluna da Direita: Formulário -->
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <h3 class="font-bold text-xl mb-4 text-gray-700">Cadastre seu Apoio</h3>
-                        <form id="support-form" class="space-y-4" target="hidden_iframe" method="POST" action="https://docs.google.com/forms/d/e/1FAIpQLSd7M1b85yGHj51fAjeGp0oz0c1PJePoICCWlzUTdrImTY1-5Q/formResponse">
+                        <form id="support-form" class="space-y-4">
                             <div>
                                 <label for="full-name" class="block text-sm font-medium text-gray-700">Nome Completo</label>
-                                <input type="text" name="entry.110149285" id="full-name" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                <input type="text" id="full-name" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors">
                             </div>
                             <div>
                                 <label for="voter-id" class="block text-sm font-medium text-gray-700">Nº do Título de Eleitor</label>
-                                <input type="text" name="entry.1616386398" id="voter-id" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                <input type="text" id="voter-id" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors">
+                                <p id="voter-id-error" class="text-red-600 text-xs mt-1 hidden">Título de eleitor inválido.</p>
                             </div>
                              <div>
                                 <label for="email" class="block text-sm font-medium text-gray-700">E-mail para contato</label>
-                                <input type="email" name="entry.1874652152" id="email" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                <input type="email" id="email" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors">
                             </div>
                             <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md">
                                 <p class="font-bold">Atenção!</p>
                                 <p class="text-sm">Seu cadastro digital ajuda a medir o apoio popular. Para a validade jurídica, você precisa **baixar, imprimir e assinar** o formulário oficial.</p>
                             </div>
-                             <button type="submit" id="submit-button" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center">
+                             <button type="submit" id="submit-button" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed">
                                 <span id="button-text">Enviar Apoio Digital</span>
                                 <div id="button-loader" class="loader hidden"></div>
                             </button>
@@ -180,8 +178,6 @@
 
 
     <script type="module">
-        window.submitted = false; // Variável de controle global
-        
         document.addEventListener('DOMContentLoaded', () => {
             // --- CONSTANTES E VARIÁVEIS GLOBAIS ---
             const deputados_data = [
@@ -428,27 +424,27 @@
                 { id: 518, "nome": "Zé Trovão", "partido": "PL", "estado": "SC" }, { id: 519, "nome": "Zé Vitor", "partido": "PL", "estado": "MG" },
                 { id: 520, "nome": "Zeca Dirceu", "partido": "PT", "estado": "PR" }, { id: 521, "nome": "Zeca do PT", "partido": "PT", "estado": "MS" },
                 { id: 522, "nome": "Zezinho Barbary", "partido": "PP", "estado": "AC" }, { id: 523, "nome": "Zucco", "partido": "REPUBLICANOS", "estado": "RS" }
-            ];
+            ];
 
-            let deputados = [];
+            let deputados = [];
 
-            // --- LÓGICA DA APLICAÇÃO ---
+            // --- LÓGICA DA APLICAÇÃO ---
 
-            // Função para inicializar os dados dos deputados
-            function initializeDeputies() {
-                deputados = deputados_data.map(d => ({
-                    ...d, 
-                    status: "Indeciso",
-                    twitter: d.nome.toLowerCase().replace(/[^a-z0-9]/g, ''),
-                    email: `dep.${d.nome.toLowerCase().replace(/\s/g, '.').replace(/[^a-z.]/g, '')}@camara.leg.br`, 
-                    foto: `https://placehold.co/200x200/4a5568/ffffff?text=${d.nome.split(' ').map(n=>n[0]).join('')}`,
-                    token: `tok_${btoa(d.id + "pec_moralidade" + d.nome).slice(-12)}`
-                }));
-            }
+            // Função para inicializar os dados dos deputados
+            function initializeDeputies() {
+                deputados = deputados_data.map(d => ({
+                    ...d, 
+                    status: "Indeciso",
+                    twitter: d.nome.toLowerCase().replace(/[^a-z0-9]/g, ''),
+                    email: `dep.${d.nome.toLowerCase().replace(/\s/g, '.').replace(/[^a-z.]/g, '')}@camara.leg.br`, 
+                    foto: `https://placehold.co/200x200/4a5568/ffffff?text=${d.nome.split(' ').map(n=>n[0]).join('')}`,
+                    token: `tok_${btoa(d.id + "pec_moralidade" + d.nome).slice(-12)}`
+                }));
+            }
 
-            // Popula o contêiner do FAQ
-            function populateFaq() {
-                const faqItems = [
+            // Popula o contêiner do FAQ
+            function populateFaq() {
+                const faqItems = [
                     { q: 'Por que um movimento de mobilização popular?', a: 'Embora cidadãos não possam propor uma Emenda à Constituição (PEC) diretamente, a Constituição nos dá o poder de nos manifestar e pressionar. Este movimento serve para mostrar aos parlamentares que há um apoio massivo da sociedade a esta pauta. Com milhões de assinaturas, a classe política não poderá ignorar o clamor por mudança.' },
                     { q: 'O que o Art. 1º (Limite ao Fundo Eleitoral) faz na prática?', a: 'Reduz o gasto público com campanhas em 90%, limitando o "Fundão Eleitoral" a 0,05% da receita da União. Isso força os partidos a serem mais eficientes e buscarem apoio direto da sociedade, em vez de dependerem de bilhões em dinheiro público.' },
                     { q: 'O que os Art. 2º e 3º (Racionalização do Congresso) fazem na prática?', a: 'Obrigam a Câmara e o Senado a definirem um teto para seus próprios gastos, usando como base a média de custos dos parlamentos de países do G20. O objetivo é acabar com o inchaço e o desperdício, gerando uma economia anual estimada em R$ 4,4 bilhões.' },
@@ -456,170 +452,241 @@
                     { q: 'O que o Art. 5º (Teto para Isenções Fiscais) faz na prática?', a: 'Este artigo cria um teto de gastos para as renúncias fiscais, limitando o total de benefícios que a União pode conceder a 5% da arrecadação. Impede que o governo abra mão de receitas de forma descontrolada e exige que toda isenção tenha prazo, meta e seja fiscalizada.' },
                     { q: 'O que o Art. 6º (Transparência nos Benefícios de Políticos) faz na prática?', a: 'Acaba com a farra dos "penduricalhos" e benefícios secretos. Qualquer auxílio pago a um político precisará ter uma justificativa clara, ser razoável e, principalmente, ser divulgado em detalhes no portal da transparência.' },
                     { q: 'O que o Art. 7º (Cronograma de Transição) faz na prática?', a: 'Estabelece prazos claros para que todas essas mudanças entrem em vigor. Define um cronograma de 1 a 5 anos para que o governo e o Congresso se adaptem, garantindo que a PEC não fique só no papel e seja implementada de forma gradual e segura.' }
-                ];
-                document.getElementById('faq-container').innerHTML = faqItems.map(item => `
-                    <div class="bg-white border-2 border-gray-200 rounded-lg">
-                        <button class="accordion-button w-full flex justify-between items-center p-4 text-left font-bold text-lg text-gray-800">
-                            <span>${item.q}</span>
-                            <svg class="w-5 h-5 transform transition-transform" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                        </button>
-                        <div class="accordion-content"><p class="p-4 pt-0 text-gray-600">${item.a}</p></div>
-                    </div>
-                `).join('');
+                ];
+                document.getElementById('faq-container').innerHTML = faqItems.map(item => `
+                    <div class="bg-white border-2 border-gray-200 rounded-lg">
+                        <button class="accordion-button w-full flex justify-between items-center p-4 text-left font-bold text-lg text-gray-800">
+                            <span>${item.q}</span>
+                            <svg class="w-5 h-5 transform transition-transform" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        </button>
+                        <div class="accordion-content"><p class="p-4 pt-0 text-gray-600">${item.a}</p></div>
+                    </div>
+                `).join('');
 
-                document.querySelectorAll('.accordion-button').forEach(button => {
-                    button.addEventListener('click', () => {
-                        button.classList.toggle('open');
-                        button.nextElementSibling.style.maxHeight = button.classList.contains('open') ? button.nextElementSibling.scrollHeight + "px" : null;
-                    });
-                });
-            }
+                document.querySelectorAll('.accordion-button').forEach(button => {
+                    button.addEventListener('click', () => {
+                        button.classList.toggle('open');
+                        button.nextElementSibling.style.maxHeight = button.classList.contains('open') ? button.nextElementSibling.scrollHeight + "px" : null;
+                    });
+                });
+            }
 
-            // Popula o seletor de estados
-            function populateStateSelector() {
-                const stateSelect = document.getElementById('state-select');
-                const estados = [...new Set(deputados.map(d => d.estado))].sort();
-                estados.forEach(estado => {
-                    stateSelect.appendChild(new Option(estado, estado));
-                });
-            }
+            // Popula o seletor de estados
+            function populateStateSelector() {
+                const stateSelect = document.getElementById('state-select');
+                const estados = [...new Set(deputados.map(d => d.estado))].sort();
+                estados.forEach(estado => {
+                    stateSelect.appendChild(new Option(estado, estado));
+                });
+            }
 
-            // Função para renderizar os cards dos deputados
-            window.renderDeputies = function(state) {
-                const deputiesGrid = document.getElementById('deputies-grid');
-                const messageArea = document.getElementById('message-area');
-                deputiesGrid.innerHTML = '';
-                const filteredDeputies = state ? deputados.filter(d => d.estado === state) : [];
+            // Função para renderizar os cards dos deputados
+            window.renderDeputies = function(state) {
+                const deputiesGrid = document.getElementById('deputies-grid');
+                const messageArea = document.getElementById('message-area');
+                deputiesGrid.innerHTML = '';
+                const filteredDeputies = state ? deputados.filter(d => d.estado === state) : [];
 
-                if (filteredDeputies.length > 0) {
-                    messageArea.style.display = 'none';
-                    filteredDeputies.forEach(deputy => deputiesGrid.innerHTML += createDeputyCard(deputy));
-                } else {
-                    messageArea.style.display = 'block';
-                    document.getElementById('message-title').textContent = state ? 'Nenhum deputado encontrado' : 'Aguardando sua seleção';
-                    document.getElementById('message-text').textContent = state ? 'Verifique se o estado selecionado está correto.' : 'Escolha um estado para ver os deputados.';
-                }
-            }
+                if (filteredDeputies.length > 0) {
+                    messageArea.style.display = 'none';
+                    filteredDeputies.forEach(deputy => deputiesGrid.innerHTML += createDeputyCard(deputy));
+                } else {
+                    messageArea.style.display = 'block';
+                    document.getElementById('message-title').textContent = state ? 'Nenhum deputado encontrado' : 'Aguardando sua seleção';
+                    document.getElementById('message-text').textContent = state ? 'Verifique se o estado selecionado está correto.' : 'Escolha um estado para ver os deputados.';
+                }
+            }
 
-            // Função para criar o HTML de um card de deputado
-            function createDeputyCard(deputy) {
-                const statusClasses = { 'Apoia': 'status-apoia', 'Contra': 'status-contra', 'Indeciso': 'status-indeciso' };
-                const baseUrl = window.location.href.split('?')[0];
-                const linkApoia = `${baseUrl}?vote=Apoia&id=${deputy.id}&token=${deputy.token}`;
-                const linkContra = `${baseUrl}?vote=Contra&id=${deputy.id}&token=${deputy.token}`;
+            // Função para criar o HTML de um card de deputado
+            function createDeputyCard(deputy) {
+                const statusClasses = { 'Apoia': 'status-apoia', 'Contra': 'status-contra', 'Indeciso': 'status-indeciso' };
+                const baseUrl = window.location.href.split('?')[0];
+                const linkApoia = `${baseUrl}?vote=Apoia&id=${deputy.id}&token=${deputy.token}`;
+                const linkContra = `${baseUrl}?vote=Contra&id=${deputy.id}&token=${deputy.token}`;
 
-                const emailBody = encodeURIComponent(`Prezado(a) Deputado(a) ${deputy.nome},\n\nEscrevo para pedir seu posicionamento sobre a PEC da Moralidade Fiscal. Para que sua posição seja refletida em nossa plataforma, por favor, clique em um dos links abaixo:\n\n- APOIO: ${linkApoia}\n- CONTRA: ${linkContra}\n\nAtenciosamente,\nUm eleitor atento.`);
-                const whatsappMessage = encodeURIComponent(`Olá, Deputado(a) ${deputy.nome}. Peço seu posicionamento sobre a #PECdaMoralidadeFiscal. Links para se posicionar: APOIA: ${linkApoia} | CONTRA: ${linkContra}`);
+                const emailBody = encodeURIComponent(`Prezado(a) Deputado(a) ${deputy.nome},\n\nEscrevo para pedir seu posicionamento sobre a PEC da Moralidade Fiscal. Para que sua posição seja refletida em nossa plataforma, por favor, clique em um dos links abaixo:\n\n- APOIO: ${linkApoia}\n- CONTRA: ${linkContra}\n\nAtenciosamente,\nUm eleitor atento.`);
+                const whatsappMessage = encodeURIComponent(`Olá, Deputado(a) ${deputy.nome}. Peço seu posicionamento sobre a #PECdaMoralidadeFiscal. Links para se posicionar: APOIA: ${linkApoia} | CONTRA: ${linkContra}`);
 
-                return `
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-transform duration-300 card-enter">
-                        <div class="p-4">
-                            <img class="h-24 w-24 rounded-full object-cover ring-4 ring-gray-200 mx-auto mb-2" src="${deputy.foto}" alt="Foto de ${deputy.nome}" onerror="this.onerror=null;this.src='https://placehold.co/200x200/e0e0e0/000?text=Foto';">
-                            <p class="text-xl font-bold text-gray-900 text-center">${deputy.nome}</p>
-                            <p class="text-sm text-gray-600 text-center">${deputy.partido} - ${deputy.estado}</p>
-                        </div>
-                        <div class="px-4 pb-4">
-                            <div class="text-center mb-4">
-                                <span class="inline-block px-3 py-1 text-sm font-semibold rounded-full ${statusClasses[deputy.status]}">Posição: ${deputy.status}</span>
-                            </div>
-                            <p class="text-xs text-center text-gray-500 mb-2">Envie os links para o deputado se posicionar:</p>
-                            <div class="grid grid-cols-3 gap-2 text-center">
-                                <a href="mailto:${deputy.email}?subject=Posicionamento%20PEC%20da%20Moralidade&body=${emailBody}" target="_blank" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold p-2 rounded-lg transition-colors text-xs flex items-center justify-center">E-mail</a>
-                                <a href="https://wa.me/?text=${whatsappMessage}" target="_blank" class="bg-green-500 hover:bg-green-600 text-white font-bold p-2 rounded-lg transition-colors text-xs flex items-center justify-center">WhatsApp</a>
-                                <a href="https://twitter.com/intent/tweet?text=@${deputy.twitter}%20Qual%20seu%20posicionamento%20sobre%20a%20%23PECdaMoralidadeFiscal?" target="_blank" class="bg-sky-500 hover:bg-sky-600 text-white font-bold p-2 rounded-lg transition-colors text-xs flex items-center justify-center">Twitter/X</a>
-                            </div>
-                        </div>
-                    </div>`;
-            }
-            
-            // --- Funções do Modal ---
-            function showConfirmation(title, message) {
-                document.getElementById('confirmation-title').textContent = title;
-                document.getElementById('confirmation-message').textContent = message;
-                document.getElementById('main-content').style.display = 'none';
-                document.getElementById('confirmation-screen').classList.remove('hidden');
-            }
+                return `
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-transform duration-300 card-enter">
+                        <div class="p-4">
+                            <img class="h-24 w-24 rounded-full object-cover ring-4 ring-gray-200 mx-auto mb-2" src="${deputy.foto}" alt="Foto de ${deputy.nome}" onerror="this.onerror=null;this.src='https://placehold.co/200x200/e0e0e0/000?text=Foto';">
+                            <p class="text-xl font-bold text-gray-900 text-center">${deputy.nome}</p>
+                            <p class="text-sm text-gray-600 text-center">${deputy.partido} - ${deputy.estado}</p>
+                        </div>
+                        <div class="px-4 pb-4">
+                            <div class="text-center mb-4">
+                                <span class="inline-block px-3 py-1 text-sm font-semibold rounded-full ${statusClasses[deputy.status]}">Posição: ${deputy.status}</span>
+                            </div>
+                            <p class="text-xs text-center text-gray-500 mb-2">Envie os links para o deputado se posicionar:</p>
+                            <div class="grid grid-cols-3 gap-2 text-center">
+                                <a href="mailto:${deputy.email}?subject=Posicionamento%20PEC%20da%20Moralidade&body=${emailBody}" target="_blank" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold p-2 rounded-lg transition-colors text-xs flex items-center justify-center">E-mail</a>
+                                <a href="https://wa.me/?text=${whatsappMessage}" target="_blank" class="bg-green-500 hover:bg-green-600 text-white font-bold p-2 rounded-lg transition-colors text-xs flex items-center justify-center">WhatsApp</a>
+                                <a href="https://twitter.com/intent/tweet?text=@${deputy.twitter}%20Qual%20seu%20posicionamento%20sobre%20a%20%23PECdaMoralidadeFiscal?" target="_blank" class="bg-sky-500 hover:bg-sky-600 text-white font-bold p-2 rounded-lg transition-colors text-xs flex items-center justify-center">Twitter/X</a>
+                            </div>
+                        </div>
+                    </div>`;
+            }
+            
+            // --- Funções do Modal e Formulário ---
+            function showConfirmation(title, message) {
+                document.getElementById('confirmation-title').textContent = title;
+                document.getElementById('confirmation-message').textContent = message;
+                document.getElementById('main-content').style.display = 'none';
+                document.getElementById('confirmation-screen').classList.remove('hidden');
+            }
 
-            window.closeConfirmation = function() {
-                document.getElementById('confirmation-screen').classList.add('hidden');
-                document.getElementById('main-content').style.display = '';
-                if (window.location.search) {
-                    const newUrl = window.location.href.split('?')[0];
-                    window.history.pushState({ path: newUrl }, '', newUrl);
-                    renderDeputies(document.getElementById('state-select').value); 
-                }
-            }
+            window.closeConfirmation = function() {
+                document.getElementById('confirmation-screen').classList.add('hidden');
+                document.getElementById('main-content').style.display = '';
+                if (window.location.search) {
+                    const newUrl = window.location.href.split('?')[0];
+                    window.history.pushState({ path: newUrl }, '', newUrl);
+                    renderDeputies(document.getElementById('state-select').value); 
+                }
+            }
 
             function handleFormSubmit(event) {
-                window.submitted = true;
-                
+                event.preventDefault(); // Impede o envio padrão do formulário
+                const form = event.target;
                 const submitButton = document.getElementById('submit-button');
                 const buttonText = document.getElementById('button-text');
                 const buttonLoader = document.getElementById('button-loader');
+
+                // Validação do Título de Eleitor antes de enviar
+                if (!validaTituloEleitor(document.getElementById('voter-id').value)) {
+                    return; // Interrompe o envio se for inválido
+                }
+
+                const formData = new FormData(form);
+                const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzQl7U1_o3rW9RSMF54q8Min0liDcGoS38tqx33mPU/exec";
+
+                // Monta o objeto com os dados do formulário
+                const data = {
+                    nome: formData.get('entry.110149285'),
+                    titulo: formData.get('entry.1616386398'),
+                    email: formData.get('entry.1874652152'),
+                };
 
                 buttonText.classList.add('hidden');
                 buttonLoader.classList.remove('hidden');
                 submitButton.disabled = true;
+
+                // Envia os dados para o seu Google Apps Script
+                fetch(WEB_APP_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Importante para evitar erros de CORS
+                    cache: 'no-cache',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(() => {
+                    // Como o 'no-cors' não permite ler a resposta, assumimos sucesso
+                    showConfirmation('Apoio Registrado!', 'Obrigado! Seu apoio foi enviado com sucesso. Você receberá uma notificação por e-mail em breve.');
+                    form.reset();
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    showConfirmation('Erro no Envio', 'Não foi possível registrar seu apoio. Por favor, tente novamente mais tarde.');
+                })
+                .finally(() => {
+                    buttonText.classList.remove('hidden');
+                    buttonLoader.classList.add('hidden');
+                    submitButton.disabled = false;
+                });
+            }
+            
+            // Função de validação do Título de Eleitor
+            function validaTituloEleitor(titulo) {
+                const tituloInput = document.getElementById('voter-id');
+                const errorMsg = document.getElementById('voter-id-error');
+                let numero = titulo.replace(/[^\d]/g, ''); // Remove caracteres não numéricos
+                
+                if (numero.length !== 12) {
+                    tituloInput.classList.add('border-red-500');
+                    tituloInput.classList.remove('border-green-500');
+                    errorMsg.classList.remove('hidden');
+                    return false;
+                }
+
+                const [d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12] = numero.split('').map(Number);
+                const uf = d9 * 10 + d10;
+
+                if (uf < 1 || uf > 28) {
+                     tituloInput.classList.add('border-red-500');
+                    tituloInput.classList.remove('border-green-500');
+                    errorMsg.classList.remove('hidden');
+                    return false;
+                }
+                
+                let soma1 = d1*2 + d2*3 + d3*4 + d4*5 + d5*6 + d6*7 + d7*8 + d8*9;
+                let dv1 = soma1 % 11;
+                if (dv1 === 10) dv1 = 0;
+
+                let soma2 = d9*7 + d10*8 + dv1*9;
+                let dv2 = soma2 % 11;
+                if (dv2 === 10) dv2 = 0;
+
+                if (dv1 === d11 && dv2 === d12) {
+                    tituloInput.classList.remove('border-red-500');
+                    tituloInput.classList.add('border-green-500');
+                    errorMsg.classList.add('hidden');
+                    return true;
+                } else {
+                    tituloInput.classList.add('border-red-500');
+                    tituloInput.classList.remove('border-green-500');
+                    errorMsg.classList.remove('hidden');
+                    return false;
+                }
             }
 
-            window.handleFormSuccess = function() {
-                window.submitted = false;
-                const form = document.getElementById('support-form');
-                const submitButton = document.getElementById('submit-button');
-                const buttonText = document.getElementById('button-text');
-                const buttonLoader = document.getElementById('button-loader');
 
-                showConfirmation('Apoio Registrado!', 'Obrigado! Seu apoio foi enviado com sucesso. Você receberá uma notificação por e-mail em breve.');
-                form.reset();
+            // Função para processar o voto vindo da URL
+            function processUrlVote() {
+                const params = new URLSearchParams(window.location.search);
+                const vote = params.get('vote');
+                const id = parseInt(params.get('id'), 10);
+                const token = params.get('token');
 
-                buttonText.classList.remove('hidden');
-                buttonLoader.classList.add('hidden');
-                submitButton.disabled = false;
-            };
+                if (!vote || !id || !token) return;
 
-            // Função para processar o voto vindo da URL
-            function processUrlVote() {
-                const params = new URLSearchParams(window.location.search);
-                const vote = params.get('vote');
-                const id = parseInt(params.get('id'), 10);
-                const token = params.get('token');
+                const deputy = deputados.find(d => d.id === id && d.token === token);
+                
+                if (deputy && (vote === 'Apoia' || vote === 'Contra')) {
+                    deputy.status = vote;
+                    localStorage.setItem(`deputy_status_${id}`, vote);
+                    showConfirmation("Voto Registrado!", `A posição do Deputado(a) ${deputy.nome} foi atualizada para "${deputy.status}".`);
+                } else {
+                    showConfirmation("Erro!", "O link de votação é inválido ou expirou.");
+                }
+            }
+            
+            // Carrega os status salvos do localStorage
+            function loadSavedStatuses() {
+                 deputados.forEach(deputy => {
+                    const savedStatus = localStorage.getItem(`deputy_status_${deputy.id}`);
+                    if (savedStatus) deputy.status = savedStatus;
+                });
+            }
 
-                if (!vote || !id || !token) return;
-
-                const deputy = deputados.find(d => d.id === id && d.token === token);
-                
-                if (deputy && (vote === 'Apoia' || vote === 'Contra')) {
-                    deputy.status = vote;
-                    localStorage.setItem(`deputy_status_${id}`, vote);
-                    showConfirmation("Voto Registrado!", `A posição do Deputado(a) ${deputy.nome} foi atualizada para "${deputy.status}".`);
-                } else {
-                    showConfirmation("Erro!", "O link de votação é inválido ou expirou.");
-                }
-            }
-            
-            // Carrega os status salvos do localStorage
-            function loadSavedStatuses() {
-                 deputados.forEach(deputy => {
-                    const savedStatus = localStorage.getItem(`deputy_status_${deputy.id}`);
-                    if (savedStatus) deputy.status = savedStatus;
-                });
-            }
-
-            // --- INICIALIZAÇÃO ---
-            initializeDeputies();
-            loadSavedStatuses();
-            populateFaq();
-            populateStateSelector();
-            
-            processUrlVote();
-            
-            if (document.getElementById('confirmation-screen').classList.contains('hidden')) {
-                 renderDeputies('');
-            }
-           
-            document.getElementById('state-select').addEventListener('change', (e) => renderDeputies(e.target.value));
-            document.getElementById('support-form').addEventListener('submit', handleFormSubmit);
-        });
-    </script>
+            // --- INICIALIZAÇÃO ---
+            initializeDeputies();
+            loadSavedStatuses();
+            populateFaq();
+            populateStateSelector();
+            
+            processUrlVote();
+            
+            if (document.getElementById('confirmation-screen').classList.contains('hidden')) {
+                 renderDeputies('');
+            }
+           
+            document.getElementById('state-select').addEventListener('change', (e) => renderDeputies(e.target.value));
+            document.getElementById('support-form').addEventListener('submit', handleFormSubmit);
+            document.getElementById('voter-id').addEventListener('input', () => validaTituloEleitor(document.getElementById('voter-id').value));
+        });
+    </script>
 </body>
-</ht
+</html>
