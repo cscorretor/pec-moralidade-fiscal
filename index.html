@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PEC da Moralidade Fiscal - O Brasil de Olho</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Adicionada a biblioteca de gráficos Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -23,7 +25,7 @@
             background-image: url('https://images.unsplash.com/photo-1599322102554-153a69192476?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
-            opacity: 0.10;
+            opacity: 0.08;
             z-index: -1;
         }
         .status-apoia { background-color: #dcfce7; color: #166534; border: 1px solid #16a34a; }
@@ -34,9 +36,6 @@
         .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out; }
         .accordion-button.open + .accordion-content { max-height: 2500px; }
         .accordion-button.open svg { transform: rotate(180deg); }
-        .prose table { width: 100%; border-collapse: collapse; }
-        .prose th, .prose td { border: 1px solid #e2e8f0; padding: 8px; text-align: left; }
-        .prose th { background-color: #f1f5f9; }
         .loader {
             border: 3px solid #f3f3f3;
             border-top: 3px solid #3b82f6;
@@ -48,6 +47,9 @@
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+        .progress-bar {
+            transition: width 1.5s ease-in-out;
         }
     </style>
 </head>
@@ -62,57 +64,120 @@
             <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">Chegou a hora de exigir um parlamento mais eficiente e menos custoso. O seu imposto deve servir ao Brasil, não a privilégios.</p>
         </header>
 
-        <!-- 2. SEÇÃO DE GRÁFICOS -->
-        <section class="mb-12 section-enter">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Os Números do Desperdício</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                <div class="bg-red-100/50 border-2 border-red-400 p-6 rounded-xl">
-                    <h3 class="text-5xl font-bold text-red-700">R$ 5 Bilhões</h3>
-                    <p class="text-red-800 mt-2">É o custo aproximado do Fundo Eleitoral, que a PEC propõe reduzir em 90%, limitando o gasto a R$ 500 milhões.</p>
+        <!-- NOVA SEÇÃO DE GRÁFICOS -->
+        <section class="mb-16 section-enter">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Por que esta PEC é Urgente?</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <!-- Gráfico 1 -->
+                <div class="bg-white/60 p-6 rounded-xl shadow-lg border border-gray-200">
+                    <h3 class="text-xl font-bold text-center text-gray-700 mb-4">Custo do Legislativo (% do PIB)</h3>
+                    <canvas id="custoLegislativoChart"></canvas>
+                    <p class="text-xs text-center text-gray-500 mt-4">Comparativo entre o custo do poder legislativo em relação ao PIB. O Brasil gasta proporcionalmente muito mais que países desenvolvidos.</p>
                 </div>
-                <div class="bg-yellow-100/50 border-2 border-yellow-400 p-6 rounded-xl">
-                    <h3 class="text-5xl font-bold text-yellow-700">R$ 789 Bilhões</h3>
-                    <p class="text-yellow-800 mt-2">É o valor das renúncias fiscais em 2024, segundo o Sindifisco. A PEC propõe um teto e uma redução gradual.</p>
-                </div>
-                <div class="bg-blue-100/50 border-2 border-blue-300 p-6 rounded-xl">
-                    <h3 class="text-5xl font-bold text-blue-700">R$ 4,4 Bilhões</h3>
-                    <p class="text-blue-800 mt-2">É a economia anual estimada apenas com a racionalização dos custos do Congresso Nacional, alinhando-o à média do G20.</p>
+                <!-- Gráfico 2 -->
+                <div class="bg-white/60 p-6 rounded-xl shadow-lg border border-gray-200">
+                    <h3 class="text-xl font-bold text-center text-gray-700 mb-4">Captura do Orçamento Público</h3>
+                    <canvas id="capturaOrcamentoChart"></canvas>
+                     <p class="text-xs text-center text-gray-500 mt-4">Proporção do orçamento capturado pelos parlamentares brasileiros em comparação com a média da OCDE.</p>
                 </div>
             </div>
         </section>
         
-        <!-- 3. SEÇÃO DE ASSINATURA DA PEC -->
+        <!-- SEÇÃO DE ASSINATURA DA PEC (REMODELADA) -->
         <section class="mb-12 section-enter">
             <div class="bg-blue-50 border-t-4 border-b-4 border-blue-500 p-8 rounded-2xl shadow-inner">
-                 <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Faça História: Apoie a PEC da Moralidade Fiscal</h2>
-                 <p class="text-center text-gray-600 mb-8 max-w-4xl mx-auto">Para que esta proposta chegue ao Congresso, precisamos mostrar a força da nossa união. Sua assinatura neste movimento é uma ferramenta poderosa de pressão. Leia a proposta na íntegra e junte-se a nós.</p>
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Assine e Faça a Diferença</h2>
+                <p class="text-center text-gray-600 mb-10 max-w-4xl mx-auto">Entenda os 5 pilares da proposta que vai mudar o Brasil e junte-se a nós para alcançarmos a meta.</p>
 
-                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <!-- Coluna da Esquerda: Texto da PEC -->
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="font-bold text-xl mb-4 text-gray-700">Redação Final da Proposta</h3>
-                        <div class="prose max-w-none text-sm text-gray-600">
-                             <h4 class="font-bold">PROPOSTA DE EMENDA À CONSTITUIÇÃO Nº ____, DE 2025 (MOBILIZAÇÃO POPULAR)</h4>
-                            <p><strong>Ementa:</strong> Altera a Constituição Federal para estabelecer limites ao financiamento público de campanhas eleitorais, reformar o sistema de renúncias fiscais, aprimorar a progressividade tributária e racionalizar os custos do Poder Legislativo.</p>
-                            <hr class="my-4">
-                            <details class="cursor-pointer mt-4">
-                                <summary class="font-semibold text-blue-600 hover:text-blue-800">Clique para ler o texto, justificação e impacto</summary>
-                                <div class="mt-4 text-xs space-y-3">
-                                     <p><strong>As Mesas da Câmara dos Deputados e do Senado Federal</strong>, nos termos do § 3º do art. 60 da Constituição Federal, promulgam a seguinte Emenda ao texto constitucional:</p>
-                                     <p><strong>Art. 1º</strong> O art. 17 da Constituição Federal passa a vigorar acrescido do seguinte § 5º:<br>"Art. 17. [...]<br>§ 5º O financiamento público de campanhas eleitorais fica limitado ao valor máximo correspondente a 0,05% (cinco centésimos por cento) da receita corrente líquida da União do exercício anterior, a ser distribuído exclusivamente entre partidos políticos que atendam aos requisitos de funcionamento parlamentar, vedada a destinação direta a candidatos individuais."</p>
-                                     <p><strong>Art. 2º</strong> O art. 51 da Constituição Federal passa a vigorar acrescido do seguinte inciso:<br>"Art. 51. [...]<br>XVIII - estabelecer, por resolução, limites para os custos operacionais totais da Casa, incluindo remunerações, benefícios e estrutura de apoio, observando como parâmetro a média proporcional dos custos dos parlamentos dos países integrantes do G20, considerando o PIB per capita."</p>
-                                     <p><strong>Art. 3º</strong> O art. 52 da Constituição Federal passa a vigorar acrescido do seguinte inciso:<br>"Art. 52. [...]<br>XVIII - estabelecer, por resolução, limites para os custos operacionais totais da Casa, incluindo remunerações, benefícios e estrutura de apoio, observando como parâmetro a média proporcional dos custos dos parlamentos dos países integrantes do G20, considerando o PIB per capita."</p>
-                                     <p><strong>Art. 4º</strong> O § 2º do art. 153 da Constituição Federal passa a vigorar com a seguinte redação, e o artigo fica acrescido do § 4º:<br>"Art. 153. [...]<br>§ 2º [...]<br>I - será informado pelos critérios da generalidade, da universalidade e da progressividade, na forma da lei, assegurada a aplicação de alíquotas progressivas que observem os padrões internacionais de tributação sobre altas rendas;<br>[...]<br>§ 4º A lei que disciplinar o imposto sobre renda e proventos de qualquer natureza estabelecerá:<br>I - alíquotas progressivas para rendimentos superiores a 60 (sessenta) salários mínimos anuais;<br>II - tributação de lucros e dividendos distribuídos, observada a sistemática de integração para evitar dupla tributação;<br>III - faixas de isenção compatíveis com o mínimo existencial."</p>
-                                     <p><strong>Art. 5º</strong> O art. 165 da Constituição Federal passa a vigorar acrescido do seguinte § 10:<br>"Art. 165. [...]<br>§ 10. A concessão de benefícios tributários pela União observará os seguintes princípios:<br>I - demonstração prévia de relevante interesse social ou econômico;<br>II - estabelecimento de contrapartidas mensuráveis em geração de empregos, investimentos sociais ou desenvolvimento regional;<br>III - prazo determinado de vigência, não superior a 5 (cinco) anos, renovável mediante nova avaliação;<br>IV - limite global anual equivalente a 5% (cinco por cento) da receita tributária federal do exercício anterior;<br>V - avaliação bienal de efetividade pelo órgão de controle externo competente."</p>
-                                     <p><strong>Art. 6º</strong> O art. 37 da Constituição Federal passa a vigorar acrescido do seguinte § 15:<br>"Art. 37. [...]<br>§ 15. Os benefícios, auxílios e verbas de qualquer natureza destinados a agentes políticos e detentores de mandato eletivo deverão:<br>I - ter previsão legal específica com justificativa de necessidade;<br>II - observar o princípio da razoabilidade e proporcionalidade;<br>III - ser objeto de divulgação mensal em portal de transparência;<br>IV - limitar-se ao estritamente necessário ao exercício da função pública."</p>
-                                     <p><strong>Art. 7º</strong> O Ato das Disposições Constitucionais Transitórias passa a vigorar acrescido dos seguintes artigos:<br>"Art. 120. A adequação aos limites estabelecidos nesta Emenda observará o seguinte cronograma:<br>I - financiamento eleitoral: aplicação imediata às eleições posteriores a 2026;<br>II - renúncias fiscais: redução gradual em 20% (vinte por cento) ao ano, atingindo o limite em 5 (cinco) exercícios;<br>III - progressividade tributária: regulamentação por lei complementar no prazo de 12 (doze) meses;<br>IV - custos legislativos: adequação no prazo de 24 (vinte e quatro) meses.<br>Art. 121. Os benefícios fiscais vigentes na data de promulgação desta Emenda permanecerão válidos pelo prazo originalmente estabelecido, limitado a 5 (cinco) anos, devendo sua renovação observar os novos critérios estabelecidos no § 10 do art. 165."</p>
-                                     <p><strong>Art. 8º</strong> Esta Emenda Constitucional entra em vigor na data de sua publicação.</p>
-                                </div>
-                            </details>
+                <!-- Contador de Apoio com Barra de Progresso -->
+                <div class="text-center mb-12 max-w-md mx-auto">
+                    <div class="flex justify-between items-end">
+                        <div class="text-left">
+                            <p class="text-lg text-gray-600">Apoiadores</p>
+                            <div id="supporters-counter" class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">1</div>
+                        </div>
+                        <div class="text-right">
+                             <p class="text-lg text-gray-600">Meta</p>
+                            <div id="goal-text" class="text-4xl font-black text-gray-700">5.000.000</div>
                         </div>
                     </div>
+                    <div class="w-full bg-gray-200 rounded-full h-4 my-2 overflow-hidden">
+                        <div id="progress-bar" class="bg-gradient-to-r from-green-500 to-blue-600 h-4 rounded-full progress-bar" style="width: 0.00002%;"></div>
+                    </div>
+                </div>
+
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Coluna da Esquerda: Os 5 Pilares -->
+                    <div class="space-y-6">
+                        <h3 class="font-bold text-2xl text-gray-800 text-center lg:text-left">Os 5 Pilares da PEC da Moralidade</h3>
+                        
+                        <!-- Pilar 1 -->
+                        <div class="flex items-start gap-4 p-4 bg-white rounded-lg shadow-md border-l-4 border-green-500">
+                            <div class="flex-shrink-0 text-green-600">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01M12 6v-1h4v1h-4zm-2 10v-1h4v1h-4z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18H3a2 2 0 01-2-2V8a2 2 0 012-2h18a2 2 0 012 2v2M7 15h10"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-gray-800">Fim do Fundão Bilionário</h4>
+                                <p class="text-sm text-gray-600 mt-1">Reduz o gasto com o Fundo Eleitoral em 90%, forçando partidos a buscarem apoio real da sociedade.</p>
+                                <p class="text-sm font-bold text-green-700 mt-2">Impacto: Mais dinheiro para saúde e educação.</p>
+                            </div>
+                        </div>
+
+                        <!-- Pilar 2 -->
+                        <div class="flex items-start gap-4 p-4 bg-white rounded-lg shadow-md border-l-4 border-blue-500">
+                            <div class="flex-shrink-0 text-blue-600">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-gray-800">Justiça no Imposto</h4>
+                                <p class="text-sm text-gray-600 mt-1">Cria um sistema mais justo, onde quem ganha mais, paga mais. Acaba com a isenção de lucros e dividendos para os mais ricos.</p>
+                                 <p class="text-sm font-bold text-blue-700 mt-2">Impacto: Menos desigualdade e alívio para a classe média.</p>
+                            </div>
+                        </div>
+
+                        <!-- Pilar 3 -->
+                        <div class="flex items-start gap-4 p-4 bg-white rounded-lg shadow-md border-l-4 border-yellow-500">
+                            <div class="flex-shrink-0 text-yellow-600">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-gray-800">Teto para Isenções Fiscais</h4>
+                                <p class="text-sm text-gray-600 mt-1">Limita os benefícios fiscais que o governo pode conceder, exigindo que cada isenção tenha prazo, meta e fiscalização.</p>
+                                <p class="text-sm font-bold text-yellow-700 mt-2">Impacto: Fim do desperdício com renúncias que não trazem retorno.</p>
+                            </div>
+                        </div>
+
+                        <!-- Pilar 4 -->
+                        <div class="flex items-start gap-4 p-4 bg-white rounded-lg shadow-md border-l-4 border-red-500">
+                             <div class="flex-shrink-0 text-red-600">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path></svg>
+                             </div>
+                             <div>
+                                <h4 class="font-bold text-lg text-gray-800">Congresso mais Barato</h4>
+                                <p class="text-sm text-gray-600 mt-1">Obriga Câmara e Senado a alinharem seus custos à média dos países do G20, acabando com o inchaço da máquina pública.</p>
+                                <p class="text-sm font-bold text-red-700 mt-2">Impacto: Economia de R$ 4,4 bilhões por ano.</p>
+                             </div>
+                        </div>
+
+                        <!-- Pilar 5 -->
+                        <div class="flex items-start gap-4 p-4 bg-white rounded-lg shadow-md border-l-4 border-indigo-500">
+                             <div class="flex-shrink-0 text-indigo-600">
+                                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                             </div>
+                             <div>
+                                <h4 class="font-bold text-lg text-gray-800">Político Transparente</h4>
+                                <p class="text-sm text-gray-600 mt-1">Fim dos "penduricalhos". Qualquer benefício ou auxílio pago a políticos deverá ter justificativa clara e ser divulgado em detalhes.</p>
+                                <p class="text-sm font-bold text-indigo-700 mt-2">Impacto: Mais controle social sobre os gastos dos políticos.</p>
+                             </div>
+                        </div>
+                         <div class="text-center pt-4">
+                            <a href="#texto-completo-modal" onclick="document.getElementById('texto-completo-modal').classList.remove('hidden')" class="text-base text-blue-600 hover:text-blue-800 hover:underline">Ler a proposta na íntegra</a>
+                         </div>
+                    </div>
+
                     <!-- Coluna da Direita: Formulário -->
-                    <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="bg-white p-6 rounded-lg shadow-xl border border-gray-200 sticky top-8">
                         <h3 class="font-bold text-xl mb-4 text-gray-700">Cadastre seu Apoio</h3>
                         <form id="support-form" class="space-y-4">
                             <div>
@@ -127,6 +192,7 @@
                              <div>
                                 <label for="email" class="block text-sm font-medium text-gray-700">E-mail para contato</label>
                                 <input type="email" id="email" name="email" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors">
+                                <p id="email-error" class="text-red-600 text-xs mt-1 hidden">Formato de e-mail inválido.</p>
                             </div>
                             <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md">
                                 <p class="font-bold">Atenção!</p>
@@ -143,7 +209,6 @@
             </div>
         </section>
 
-        <!-- (Resto do HTML igual ao anterior) -->
         <section class="mb-12 section-enter">
             <div class="bg-gray-50 p-8 rounded-2xl shadow-inner">
                 <h2 class="text-3xl font-bold text-center text-gray-800 mb-2">Pressione seu Deputado</h2>
@@ -168,11 +233,37 @@
         </section>
     </div>
     
+    <!-- Modal de Confirmação -->
     <div id="confirmation-screen" class="hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4 z-50">
         <div class="bg-white rounded-lg shadow-xl p-8 text-center max-w-sm mx-auto transform transition-all" id="modal-content">
             <h2 id="confirmation-title" class="text-2xl font-bold mb-4"></h2>
             <p id="confirmation-message" class="text-gray-600 mb-6"></p>
             <button onclick="closeConfirmation()" class="bg-blue-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors">Fechar</button>
+        </div>
+    </div>
+    
+    <!-- Modal para o texto completo da PEC -->
+    <div id="texto-completo-modal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-auto transform transition-all">
+             <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                     <h2 class="text-2xl font-bold">Texto da Proposta na Íntegra</h2>
+                     <button onclick="document.getElementById('texto-completo-modal').classList.add('hidden')" class="text-gray-500 hover:text-gray-800">&times;</button>
+                </div>
+                <div class="prose max-w-none text-xs text-gray-600 max-h-[70vh] overflow-y-auto pr-4">
+                     <p><strong>Ementa:</strong> Altera a Constituição Federal para estabelecer limites ao financiamento público de campanhas eleitorais, reformar o sistema de renúncias fiscais, aprimorar a progressividade tributária e racionalizar os custos do Poder Legislativo.</p>
+                     <hr class="my-4">
+                     <p><strong>As Mesas da Câmara dos Deputados e do Senado Federal</strong>, nos termos do § 3º do art. 60 da Constituição Federal, promulgam a seguinte Emenda ao texto constitucional:</p>
+                     <p><strong>Art. 1º</strong> O art. 17 da Constituição Federal passa a vigorar acrescido do seguinte § 5º:<br>"Art. 17. [...]<br>§ 5º O financiamento público de campanhas eleitorais fica limitado ao valor máximo correspondente a 0,05% (cinco centésimos por cento) da receita corrente líquida da União do exercício anterior, a ser distribuído exclusivamente entre partidos políticos que atendam aos requisitos de funcionamento parlamentar, vedada a destinação direta a candidatos individuais."</p>
+                     <p><strong>Art. 2º</strong> O art. 51 da Constituição Federal passa a vigorar acrescido do seguinte inciso:<br>"Art. 51. [...]<br>XVIII - estabelecer, por resolução, limites para os custos operacionais totais da Casa, incluindo remunerações, benefícios e estrutura de apoio, observando como parâmetro a média proporcional dos custos dos parlamentos dos países integrantes do G20, considerando o PIB per capita."</p>
+                     <p><strong>Art. 3º</strong> O art. 52 da Constituição Federal passa a vigorar acrescido do seguinte inciso:<br>"Art. 52. [...]<br>XVIII - estabelecer, por resolução, limites para os custos operacionais totais da Casa, incluindo remunerações, benefícios e estrutura de apoio, observando como parâmetro a média proporcional dos custos dos parlamentos dos países integrantes do G20, considerando o PIB per capita."</p>
+                     <p><strong>Art. 4º</strong> O § 2º do art. 153 da Constituição Federal passa a vigorar com a seguinte redação, e o artigo fica acrescido do § 4º:<br>"Art. 153. [...]<br>§ 2º [...]<br>I - será informado pelos critérios da generalidade, da universalidade e da progressividade, na forma da lei, assegurada a aplicação de alíquotas progressivas que observem os padrões internacionais de tributação sobre altas rendas;<br>[...]<br>§ 4º A lei que disciplinar o imposto sobre renda e proventos de qualquer natureza estabelecerá:<br>I - alíquotas progressivas para rendimentos superiores a 60 (sessenta) salários mínimos anuais;<br>II - tributação de lucros e dividendos distribuídos, observada a sistemática de integração para evitar dupla tributação;<br>III - faixas de isenção compatíveis com o mínimo existencial."</p>
+                     <p><strong>Art. 5º</strong> O art. 165 da Constituição Federal passa a vigorar acrescido do seguinte § 10:<br>"Art. 165. [...]<br>§ 10. A concessão de benefícios tributários pela União observará os seguintes princípios:<br>I - demonstração prévia de relevante interesse social ou econômico;<br>II - estabelecimento de contrapartidas mensuráveis em geração de empregos, investimentos sociais ou desenvolvimento regional;<br>III - prazo determinado de vigência, não superior a 5 (cinco) anos, renovável mediante nova avaliação;<br>IV - limite global anual equivalente a 5% (cinco por cento) da receita tributária federal do exercício anterior;<br>V - avaliação bienal de efetividade pelo órgão de controle externo competente."</p>
+                     <p><strong>Art. 6º</strong> O art. 37 da Constituição Federal passa a vigorar acrescido do seguinte § 15:<br>"Art. 37. [...]<br>§ 15. Os benefícios, auxílios e verbas de qualquer natureza destinados a agentes políticos e detentores de mandato eletivo deverão:<br>I - ter previsão legal específica com justificativa de necessidade;<br>II - observar o princípio da razoabilidade e proporcionalidade;<br>III - ser objeto de divulgação mensal em portal de transparência;<br>IV - limitar-se ao estritamente necessário ao exercício da função pública."</p>
+                     <p><strong>Art. 7º</strong> O Ato das Disposições Constitucionais Transitórias passa a vigorar acrescido dos seguintes artigos:<br>"Art. 120. A adequação aos limites estabelecidos nesta Emenda observará o seguinte cronograma:<br>I - financiamento eleitoral: aplicação imediata às eleições posteriores a 2026;<br>II - renúncias fiscais: redução gradual em 20% (vinte por cento) ao ano, atingindo o limite em 5 (cinco) exercícios;<br>III - progressividade tributária: regulamentação por lei complementar no prazo de 12 (doze) meses;<br>IV - custos legislativos: adequação no prazo de 24 (vinte e quatro) meses.<br>Art. 121. Os benefícios fiscais vigentes na data de promulgação desta Emenda permanecerão válidos pelo prazo originalmente estabelecido, limitado a 5 (cinco) anos, devendo sua renovação observar os novos critérios estabelecidos no § 10 do art. 165."</p>
+                     <p><strong>Art. 8º</strong> Esta Emenda Constitucional entra em vigor na data de sua publicação.</p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -545,81 +636,70 @@
                 }
             }
             
-            // =================================================================================
-            // === ÚNICA SEÇÃO ALTERADA PARA CORRIGIR A COMUNICAÇÃO COM A PLANILHA           ===
-            // =================================================================================
+            // --- CÓDIGO FUNCIONAL - NÃO ALTERAR ---
             function handleFormSubmit(event) {
-                event.preventDefault(); // Impede o envio padrão do formulário
+                event.preventDefault(); 
                 const form = event.target;
                 const submitButton = document.getElementById('submit-button');
                 const buttonText = document.getElementById('button-text');
                 const buttonLoader = document.getElementById('button-loader');
 
-                // Validação do Título de Eleitor antes de enviar
                 if (!validaTituloEleitor(document.getElementById('voter-id').value)) {
                     showConfirmation('Atenção', 'Por favor, insira um número de Título de Eleitor válido para continuar.');
-                    return; // Interrompe o envio se for inválido
+                    return; 
                 }
                 
-                // URL do seu Google Apps Script (ATUALIZADA).
+                if (!validaEmail(document.getElementById('email').value)) {
+                    showConfirmation('Atenção', 'Por favor, insira um formato de e-mail válido.');
+                    return;
+                }
+                
                 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzThksQq2GC4v3GH5QMLZNA6wyw8JyfQIwpBVqrgGJICOv2E1qNTIkOz65OVfLKnkW_/exec";
                 
                 buttonText.classList.add('hidden');
                 buttonLoader.classList.remove('hidden');
                 submitButton.disabled = true;
 
-                // Envia os dados usando FormData para evitar problemas de CORS
                 fetch(WEB_APP_URL, {
                     method: 'POST',
                     body: new FormData(form),
                 })
                 .then(response => {
-                    // Adiciona log para ver a resposta crua do servidor
-                    console.log('Resposta do Servidor (crua):', response);
                     if (!response.ok) {
                        throw new Error(`HTTP error! status: ${response.status}`);
                     }
                     return response.json();
                 }) 
                 .then(result => {
-                    console.log('Resposta do Servidor (processada):', result);
-                    // Verifica se o Google confirmou o sucesso
                     if (result.status === 'success') {
                         showConfirmation('Apoio Registrado!', `Obrigado! Seu apoio foi enviado com sucesso. Você receberá uma confirmação por e-mail em: ${form.elements.email.value}`);
                         form.reset();
-                        const tituloInput = document.getElementById('voter-id');
-                        tituloInput.classList.remove('border-red-500', 'border-green-500');
+                        document.getElementById('voter-id').classList.remove('border-red-500', 'border-green-500');
+                        document.getElementById('email').classList.remove('border-red-500', 'border-green-500');
                     } else {
-                        // Se o Google retornar um erro, ele será mostrado aqui
                         showConfirmation('Erro no Envio', 'Não foi possível registrar seu apoio. Detalhe: ' + result.message);
                     }
                 })
                 .catch(error => {
-                    // Captura erros de conexão (sem internet, etc)
                     console.error('ERRO DETALHADO DE CONEXÃO:', error);
                     showConfirmation('Erro de Conexão', 'Não foi possível se comunicar com o servidor. Verifique o console do navegador (F12) para detalhes do erro.');
                 })
                 .finally(() => {
-                    // Garante que o botão de envio volte ao normal
                     buttonText.classList.remove('hidden');
                     buttonLoader.classList.add('hidden');
                     submitButton.disabled = false;
                 });
             }
-            // =================================================================================
-            // === FIM DA SEÇÃO ALTERADA                                                    ===
-            // =================================================================================
             
             // Função de validação do Título de Eleitor
             function validaTituloEleitor(titulo) {
                 const tituloInput = document.getElementById('voter-id');
                 const errorMsg = document.getElementById('voter-id-error');
                 const submitButton = document.getElementById('submit-button');
-                let numero = titulo.replace(/[^\d]/g, ''); // Remove caracteres não numéricos
+                let numero = titulo.replace(/[^\d]/g, ''); 
                 
-                if (numero.length < 12) {
-                    tituloInput.classList.remove('border-red-500', 'border-green-500');
-                    errorMsg.classList.add('hidden');
+                if (numero.length !== 12) {
+                    tituloInput.classList.remove('border-green-500');
                     submitButton.disabled = true;
                     return false;
                 }
@@ -657,6 +737,29 @@
                     return false;
                 }
             }
+            
+            // NOVA FUNÇÃO para validar e-mail
+            function validaEmail(email) {
+                const emailInput = document.getElementById('email');
+                const errorMsg = document.getElementById('email-error');
+                const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                if (regex.test(email)) {
+                    emailInput.classList.remove('border-red-500');
+                    emailInput.classList.add('border-green-500');
+                    errorMsg.classList.add('hidden');
+                    return true;
+                } else if (email.length > 0) {
+                    emailInput.classList.add('border-red-500');
+                    emailInput.classList.remove('border-green-500');
+                    errorMsg.classList.remove('hidden');
+                    return false;
+                } else {
+                    emailInput.classList.remove('border-red-500', 'border-green-500');
+                    errorMsg.classList.add('hidden');
+                    return false;
+                }
+            }
 
 
             // Função para processar o voto vindo da URL
@@ -687,11 +790,113 @@
                 });
             }
 
+            // NOVA FUNÇÃO para inicializar os gráficos
+            function initializeCharts() {
+                // Gráfico 1: Custo do Legislativo
+                const ctx1 = document.getElementById('custoLegislativoChart').getContext('2d');
+                new Chart(ctx1, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Brasil', 'EUA', 'Alemanha', 'França', 'Japão', 'Média OCDE'],
+                        datasets: [{
+                            label: '% do PIB',
+                            data: [0.27, 0.03, 0.02, 0.02, 0.02, 0.02],
+                            backgroundColor: [
+                                'rgba(239, 68, 68, 0.8)', // red-500
+                                'rgba(59, 130, 246, 0.7)', // blue-500
+                                'rgba(59, 130, 246, 0.7)',
+                                'rgba(59, 130, 246, 0.7)',
+                                'rgba(59, 130, 246, 0.7)',
+                                'rgba(34, 197, 94, 0.7)' // green-500
+                            ],
+                            borderColor: [
+                                'rgba(220, 38, 38, 1)',
+                                'rgba(37, 99, 235, 1)',
+                                'rgba(37, 99, 235, 1)',
+                                'rgba(37, 99, 235, 1)',
+                                'rgba(37, 99, 235, 1)',
+                                'rgba(22, 163, 74, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: { label: (context) => `${context.raw}%` }
+                            }
+                        },
+                        scales: {
+                            x: { beginAtZero: true }
+                        }
+                    }
+                });
+
+                // Gráfico 2: Captura do Orçamento
+                const ctx2 = document.getElementById('capturaOrcamentoChart').getContext('2d');
+                new Chart(ctx2, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Brasil', 'Média OCDE'],
+                        datasets: [{
+                            label: 'Proporção Relativa',
+                            data: [20, 1],
+                            backgroundColor: [
+                                'rgba(239, 68, 68, 0.8)', // red-500
+                                'rgba(34, 197, 94, 0.7)' // green-500
+                            ],
+                            borderColor: [
+                                'rgba(220, 38, 38, 1)',
+                                'rgba(22, 163, 74, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                     options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                             tooltip: {
+                                callbacks: { label: (context) => `${context.raw}x` }
+                            }
+                        },
+                        scales: {
+                            y: { beginAtZero: true, suggestedMax: 25 }
+                        }
+                    }
+                });
+            }
+
+            // NOVA FUNÇÃO para atualizar o contador
+            function updateCounter() {
+                const currentSupporters = 1; // Corrigido para 1
+                const goal = 5000000;      // Corrigido para 5 milhões
+                const percentage = (currentSupporters / goal) * 100;
+                
+                const counterElement = document.getElementById('supporters-counter');
+                const progressBarElement = document.getElementById('progress-bar');
+                const goalTextElement = document.getElementById('goal-text');
+
+                counterElement.textContent = currentSupporters.toLocaleString('pt-BR');
+                goalTextElement.textContent = `${goal.toLocaleString('pt-BR')}`;
+                
+                // Anima a barra de progresso
+                setTimeout(() => {
+                    progressBarElement.style.width = `${Math.min(percentage, 100)}%`;
+                }, 100);
+            }
+
+
             // --- INICIALIZAÇÃO ---
             initializeDeputies();
             loadSavedStatuses();
             populateFaq();
             populateStateSelector();
+            initializeCharts(); // <-- Chama a nova função dos gráficos
+            updateCounter(); // <-- Chama a nova função do contador
             
             processUrlVote();
             
@@ -701,7 +906,8 @@
             
             document.getElementById('state-select').addEventListener('change', (e) => renderDeputies(e.target.value));
             document.getElementById('support-form').addEventListener('submit', handleFormSubmit);
-            document.getElementById('voter-id').addEventListener('input', () => validaTituloEleitor(document.getElementById('voter-id').value));
+            document.getElementById('voter-id').addEventListener('input', (e) => validaTituloEleitor(e.target.value));
+            document.getElementById('email').addEventListener('input', (e) => validaEmail(e.target.value));
         });
     </script>
 </body>
