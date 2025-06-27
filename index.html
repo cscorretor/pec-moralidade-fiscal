@@ -573,8 +573,13 @@
                     method: 'POST',
                     body: new FormData(form),
                 })
-                .then(response => response.json()) // Processa a resposta do Google
+                .then(response => {
+                    // Adiciona log para ver a resposta crua do servidor
+                    console.log('Resposta do Servidor (crua):', response);
+                    return response.json();
+                }) 
                 .then(result => {
+                    console.log('Resposta do Servidor (processada):', result);
                     // Verifica se o Google confirmou o sucesso
                     if (result.status === 'success') {
                         showConfirmation('Apoio Registrado!', `Obrigado! Seu apoio foi enviado com sucesso. Você receberá uma confirmação por e-mail em: ${form.elements.email.value}`);
@@ -588,8 +593,8 @@
                 })
                 .catch(error => {
                     // Captura erros de conexão (sem internet, etc)
-                    console.error('Erro de Conexão:', error);
-                    showConfirmation('Erro de Conexão', 'Não foi possível se comunicar com o servidor. Verifique sua conexão com a internet.');
+                    console.error('ERRO DETALHADO DE CONEXÃO:', error);
+                    showConfirmation('Erro de Conexão', 'Não foi possível se comunicar com o servidor. Verifique o console do navegador (F12) para detalhes do erro.');
                 })
                 .finally(() => {
                     // Garante que o botão de envio volte ao normal
@@ -698,3 +703,69 @@
     </script>
 </body>
 </html>
+```
+
+Most up-to-date Immersive Artifact for "apps-script-final-corrigido" is:
+
+```javascript
+// CÓDIGO CORRETO PARA O GOOGLE APPS SCRIPT (PLANILHA)
+
+const NOME_DA_ABA = "Página1"; 
+
+function doPost(e) {
+  try {
+    const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    const sheet = spreadsheet.getSheetByName(NOME_DA_ABA);
+    
+    // ALTERAÇÃO CRÍTICA: Lendo dados enviados como FormData
+    const data = e.parameter;
+
+    if (!data.nome || !data.titulo || !data.email) {
+      throw new Error("Dados incompletos recebidos.");
+    }
+
+    // A ordem está correta para a sua planilha: Timestamp, Nome, Título, Email
+    sheet.appendRow([
+      new Date(),     
+      data.nome,      
+      data.titulo,    
+      data.email      
+    ]);
+
+    enviarEmailConfirmacao(data.nome, data.email);
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'success', message: 'Apoio registrado com sucesso.' }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (error) {
+    Logger.log(error.toString());
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'error', message: error.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function enviarEmailConfirmacao(nome, email) {
+  const assunto = "✅ Confirmação de Apoio - PEC da Moralidade Fiscal";
+  const corpo = `
+    Olá, ${nome}!
+
+    Agradecemos imensamente o seu apoio à PEC da Moralidade Fiscal.
+    
+    Seu registro digital foi recebido com sucesso e ajuda a dar força ao nosso movimento.
+    
+    Lembre-se: para que seu apoio tenha validade jurídica para uma Proposta de Iniciativa Popular, é fundamental também baixar, imprimir e assinar o formulário físico disponível em nosso site.
+
+    Juntos, podemos exigir um parlamento mais eficiente e um Brasil mais justo.
+
+    Atenciosamente,
+    Equipe "O Brasil de Olho"
+  `;
+  
+  MailApp.sendEmail(email, assunto, corpo);
+}
+
+function doGet(e) {
+  return ContentService.createTextOutput("O script da PEC da Moralidade Fiscal está online e funcionando.");
+}
