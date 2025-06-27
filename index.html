@@ -7,13 +7,14 @@
     <!-- Título da Página -->
     <title>PEC da Moralidade Fiscal - O Brasil de Olho</title>
 
-    <!-- NOVAS META TAGS PARA PARTILHA EM REDES SOCIAIS (OPEN GRAPH) -->
+    <!-- META TAGS ATUALIZADAS PARA PARTILHA EM REDES SOCIAIS -->
     <meta property="og:title" content="PEC da Moralidade Fiscal - O Brasil de Olho">
     <meta property="og:description" content="Chegou a hora de exigir um parlamento mais eficiente e menos custoso. O seu imposto deve servir ao Brasil, não a privilégios.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1538370965246-fe4c0b483933?q=80&w=1200&h=630&fit=crop&crop=center">
+    <!-- NOTA: Para usar a sua imagem específica, basta carregá-la para o seu projeto no GitHub e colocar o link aqui. -->
+    <meta property="og:image" content="https://images.unsplash.com/photo-1603594247565-867280931215?q=80&w=1200&h=630&fit=crop&crop=center">
     <meta property="og:url" content="https://csccorretor.github.io/pec-moralidade-fiscal/">
     <meta property="og:type" content="website">
-    <!-- FIM DAS NOVAS META TAGS -->
+    <!-- FIM DAS META TAGS -->
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -74,21 +75,21 @@
             <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">Chegou a hora de exigir um parlamento mais eficiente e menos custoso. O seu imposto deve servir ao Brasil, não a privilégios.</p>
         </header>
 
-        <!-- NOVA SEÇÃO DE GRÁFICOS -->
-        <section class="mb-16 section-enter">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Por que esta PEC é Urgente?</h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                <!-- Gráfico 1 -->
-                <div class="bg-white/60 p-6 rounded-xl shadow-lg border border-gray-200">
-                    <h3 class="text-xl font-bold text-center text-gray-700 mb-4">Custo do Legislativo (% do PIB)</h3>
-                    <canvas id="custoLegislativoChart"></canvas>
-                    <p class="text-xs text-center text-gray-500 mt-4">Comparativo entre o custo do poder legislativo em relação ao PIB. O Brasil gasta proporcionalmente muito mais que países desenvolvidos.</p>
+        <!-- SEÇÃO DE NÚMEROS RESTAURADA -->
+        <section class="mb-12 section-enter">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Os Números do Desperdício</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="bg-red-100/50 border-2 border-red-400 p-6 rounded-xl">
+                    <h3 class="text-5xl font-bold text-red-700">R$ 5 Bilhões</h3>
+                    <p class="text-red-800 mt-2">É o custo aproximado do Fundo Eleitoral, que a PEC propõe reduzir em 90%, limitando o gasto a R$ 500 milhões.</p>
                 </div>
-                <!-- Gráfico 2 -->
-                <div class="bg-white/60 p-6 rounded-xl shadow-lg border border-gray-200">
-                    <h3 class="text-xl font-bold text-center text-gray-700 mb-4">Captura do Orçamento Público</h3>
-                    <canvas id="capturaOrcamentoChart"></canvas>
-                     <p class="text-xs text-center text-gray-500 mt-4">Proporção do orçamento capturado pelos parlamentares brasileiros em comparação com a média da OCDE.</p>
+                <div class="bg-yellow-100/50 border-2 border-yellow-400 p-6 rounded-xl">
+                    <h3 class="text-5xl font-bold text-yellow-700">R$ 789 Bilhões</h3>
+                    <p class="text-yellow-800 mt-2">É o valor estimado das renúncias fiscais anuais. A PEC propõe um teto e uma redução gradual.</p>
+                </div>
+                <div class="bg-blue-100/50 border-2 border-blue-300 p-6 rounded-xl">
+                    <h3 class="text-5xl font-bold text-blue-700">R$ 4,4 Bilhões</h3>
+                    <p class="text-blue-800 mt-2">É a economia anual estimada apenas com a racionalização dos custos do Congresso Nacional, alinhando-o à média do G20.</p>
                 </div>
             </div>
         </section>
@@ -905,7 +906,7 @@
             loadSavedStatuses();
             populateFaq();
             populateStateSelector();
-            initializeCharts(); // <-- Chama a nova função dos gráficos
+            // initializeCharts(); // <-- Gráficos removidos temporariamente
             updateCounter(); // <-- Chama a nova função do contador
             
             processUrlVote();
@@ -921,4 +922,4 @@
         });
     </script>
 </body>
-</ht
+</html>
