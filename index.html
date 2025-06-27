@@ -665,7 +665,7 @@
                     return;
                 }
                 
-                const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzThksQq2GC4v3GH5QMLZNA6wyw8JyfQIwpBVqrgGJICOv2E1qNTIkOz65OVfLKnkW_/exec";
+                const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxuqlsCWEk7pzt60pUV9Obc5_EDwii9sxXYG9zCfo4ffpInxKJDtqnn2Lnz-vcEZ1Ip/exec";
                 
                 buttonText.classList.add('hidden');
                 buttonLoader.classList.remove('hidden');
@@ -687,6 +687,8 @@
                         form.reset();
                         document.getElementById('voter-id').classList.remove('border-red-500', 'border-green-500');
                         document.getElementById('email').classList.remove('border-red-500', 'border-green-500');
+                        // Atualiza o contador após o sucesso
+                        updateCounter();
                     } else {
                         showConfirmation('Erro no Envio', 'Não foi possível registrar seu apoio. Detalhe: ' + result.message);
                     }
@@ -801,103 +803,31 @@
                 });
             }
 
-            // NOVA FUNÇÃO para inicializar os gráficos
-            function initializeCharts() {
-                // Gráfico 1: Custo do Legislativo
-                const ctx1 = document.getElementById('custoLegislativoChart').getContext('2d');
-                new Chart(ctx1, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Brasil', 'EUA', 'Alemanha', 'França', 'Japão', 'Média OCDE'],
-                        datasets: [{
-                            label: '% do PIB',
-                            data: [0.27, 0.03, 0.02, 0.02, 0.02, 0.02],
-                            backgroundColor: [
-                                'rgba(239, 68, 68, 0.8)', // red-500
-                                'rgba(59, 130, 246, 0.7)', // blue-500
-                                'rgba(59, 130, 246, 0.7)',
-                                'rgba(59, 130, 246, 0.7)',
-                                'rgba(59, 130, 246, 0.7)',
-                                'rgba(34, 197, 94, 0.7)' // green-500
-                            ],
-                            borderColor: [
-                                'rgba(220, 38, 38, 1)',
-                                'rgba(37, 99, 235, 1)',
-                                'rgba(37, 99, 235, 1)',
-                                'rgba(37, 99, 235, 1)',
-                                'rgba(37, 99, 235, 1)',
-                                'rgba(22, 163, 74, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        indexAxis: 'y',
-                        responsive: true,
-                        plugins: {
-                            legend: { display: false },
-                            tooltip: {
-                                callbacks: { label: (context) => `${context.raw}%` }
-                            }
-                        },
-                        scales: {
-                            x: { beginAtZero: true }
-                        }
-                    }
-                });
-
-                // Gráfico 2: Captura do Orçamento
-                const ctx2 = document.getElementById('capturaOrcamentoChart').getContext('2d');
-                new Chart(ctx2, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Brasil', 'Média OCDE'],
-                        datasets: [{
-                            label: 'Proporção Relativa',
-                            data: [20, 1],
-                            backgroundColor: [
-                                'rgba(239, 68, 68, 0.8)', // red-500
-                                'rgba(34, 197, 94, 0.7)' // green-500
-                            ],
-                            borderColor: [
-                                'rgba(220, 38, 38, 1)',
-                                'rgba(22, 163, 74, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                     options: {
-                        responsive: true,
-                        plugins: {
-                            legend: { display: false },
-                             tooltip: {
-                                callbacks: { label: (context) => `${context.raw}x` }
-                            }
-                        },
-                        scales: {
-                            y: { beginAtZero: true, suggestedMax: 25 }
-                        }
-                    }
-                });
-            }
-
             // NOVA FUNÇÃO para atualizar o contador
             function updateCounter() {
-                const currentSupporters = 1; // Corrigido para 1
-                const goal = 5000000;      // Corrigido para 5 milhões
-                const percentage = (currentSupporters / goal) * 100;
+                const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxuqlsCWEk7pzt60pUV9Obc5_EDwii9sxXYG9zCfo4ffpInxKJDtqnn2Lnz-vcEZ1Ip/exec";
                 
-                const counterElement = document.getElementById('supporters-counter');
-                const progressBarElement = document.getElementById('progress-bar');
-                const goalTextElement = document.getElementById('goal-text');
+                fetch(`${WEB_APP_URL}?action=getSupportersCount`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            const currentSupporters = data.count;
+                            const goal = 5000000;
+                            const percentage = (currentSupporters / goal) * 100;
+                            
+                            const counterElement = document.getElementById('supporters-counter');
+                            const progressBarElement = document.getElementById('progress-bar');
+                            const goalTextElement = document.getElementById('goal-text');
 
-                counterElement.textContent = currentSupporters.toLocaleString('pt-BR');
-                goalTextElement.textContent = `${goal.toLocaleString('pt-BR')}`;
-                
-                // Anima a barra de progresso
-                setTimeout(() => {
-                    progressBarElement.style.width = `${Math.min(percentage, 100)}%`;
-                }, 100);
+                            counterElement.textContent = currentSupporters.toLocaleString('pt-BR');
+                            goalTextElement.textContent = `${goal.toLocaleString('pt-BR')}`;
+                            
+                            setTimeout(() => {
+                                progressBarElement.style.width = `${Math.min(percentage, 100)}%`;
+                            }, 100);
+                        }
+                    })
+                    .catch(error => console.error('Erro ao buscar contador:', error));
             }
 
 
@@ -906,8 +836,7 @@
             loadSavedStatuses();
             populateFaq();
             populateStateSelector();
-            // initializeCharts(); // <-- Gráficos removidos temporariamente
-            updateCounter(); // <-- Chama a nova função do contador
+            updateCounter(); // <-- Chama a função do contador dinâmico
             
             processUrlVote();
             
