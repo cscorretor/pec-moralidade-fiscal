@@ -547,149 +547,63 @@
             }
 
             function handleFormSubmit(event) {
-                event.preventDefault(); // Impede o envio padrão do formulário
-                const form = event.target;
-                const submitButton = document.getElementById('submit-button');
-                const buttonText = document.getElementById('button-text');
-                const buttonLoader = document.getElementById('button-loader');
+    event.preventDefault(); // Impede o envio padrão do formulário
+    const form = event.target;
+    const submitButton = document.getElementById('submit-button');
+    const buttonText = document.getElementById('button-text');
+    const buttonLoader = document.getElementById('button-loader');
 
-                // Validação do Título de Eleitor antes de enviar
-                if (!validaTituloEleitor(document.getElementById('voter-id').value)) {
-                    return; // Interrompe o envio se for inválido
-                }
+    // Validação do Título de Eleitor antes de enviar
+    if (!validaTituloEleitor(document.getElementById('voter-id').value)) {
+        showConfirmation('Atenção', 'Por favor, insira um número de Título de Eleitor válido para continuar.');
+        return; // Interrompe o envio se for inválido
+    }
 
-                const formData = new FormData(form);
-                const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzQl7U1_o3rW9RSMF54q8Min0liDcGoS38tqx33mPU/exec";
+    // !! CERTIFIQUE-SE QUE ESTA URL ESTÁ CORRETA !!
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyQI-kCGQcrpIgEzXG59FLdAlZlF0uYsnhXbL2TXHydFcCvNa09Yiu-wqZ0qaxZsK-l/exec";
 
-                // Monta o objeto com os dados do formulário para o Apps Script
-                const data = {
-                    nome: document.getElementById('full-name').value,
-                    titulo: document.getElementById('voter-id').value,
-                    email: document.getElementById('email').value
-                };
+    const data = {
+        nome: document.getElementById('full-name').value,
+        titulo: document.getElementById('voter-id').value,
+        email: document.getElementById('email').value
+    };
 
-                buttonText.classList.add('hidden');
-                buttonLoader.classList.remove('hidden');
-                submitButton.disabled = true;
+    buttonText.classList.add('hidden');
+    buttonLoader.classList.remove('hidden');
+    submitButton.disabled = true;
 
-                // Envia os dados para o seu Google Apps Script
-                fetch(WEB_APP_URL, {
-                    method: 'POST',
-                    mode: 'no-cors', // Importante para evitar erros de CORS
-                    cache: 'no-cache',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data),
-                    redirect: 'follow'
-                })
-                .then(() => {
-                    // Como o 'no-cors' não permite ler a resposta, assumimos sucesso
-                    showConfirmation('Apoio Registrado!', 'Obrigado! Seu apoio foi enviado com sucesso. Você receberá uma notificação por e-mail em breve.');
-                    form.reset();
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                    showConfirmation('Erro no Envio', 'Não foi possível registrar seu apoio. Por favor, tente novamente mais tarde.');
-                })
-                .finally(() => {
-                    buttonText.classList.remove('hidden');
-                    buttonLoader.classList.add('hidden');
-                    submitButton.disabled = false;
-                });
-            }
-            
-            // Função de validação do Título de Eleitor
-            function validaTituloEleitor(titulo) {
-                const tituloInput = document.getElementById('voter-id');
-                const errorMsg = document.getElementById('voter-id-error');
-                const submitButton = document.getElementById('submit-button');
-                let numero = titulo.replace(/[^\d]/g, ''); // Remove caracteres não numéricos
-                
-                if (numero.length < 12) {
-                    tituloInput.classList.remove('border-red-500', 'border-green-500');
-                    errorMsg.classList.add('hidden');
-                    submitButton.disabled = true;
-                    return false;
-                }
-
-                const [d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12] = numero.split('').map(Number);
-                const uf = d9 * 10 + d10;
-
-                if (uf < 1 || uf > 28) {
-                    tituloInput.classList.add('border-red-500');
-                    tituloInput.classList.remove('border-green-500');
-                    errorMsg.classList.remove('hidden');
-                    submitButton.disabled = true;
-                    return false;
-                }
-                
-                let soma1 = d1*2 + d2*3 + d3*4 + d4*5 + d5*6 + d6*7 + d7*8 + d8*9;
-                let dv1 = soma1 % 11;
-                if (dv1 === 10) dv1 = 0;
-
-                let soma2 = d9*7 + d10*8 + dv1*9;
-                let dv2 = soma2 % 11;
-                if (dv2 === 10) dv2 = 0;
-
-                if (dv1 === d11 && dv2 === d12) {
-                    tituloInput.classList.remove('border-red-500');
-                    tituloInput.classList.add('border-green-500');
-                    errorMsg.classList.add('hidden');
-                    submitButton.disabled = false;
-                    return true;
-                } else {
-                    tituloInput.classList.add('border-red-500');
-                    tituloInput.classList.remove('border-green-500');
-                    errorMsg.classList.remove('hidden');
-                    submitButton.disabled = true;
-                    return false;
-                }
-            }
-
-
-            // Função para processar o voto vindo da URL
-            function processUrlVote() {
-                const params = new URLSearchParams(window.location.search);
-                const vote = params.get('vote');
-                const id = parseInt(params.get('id'), 10);
-                const token = params.get('token');
-
-                if (!vote || !id || !token) return;
-
-                const deputy = deputados.find(d => d.id === id && d.token === token);
-                
-                if (deputy && (vote === 'Apoia' || vote === 'Contra')) {
-                    deputy.status = vote;
-                    localStorage.setItem(`deputy_status_${id}`, vote);
-                    showConfirmation("Voto Registrado!", `A posição do Deputado(a) ${deputy.nome} foi atualizada para "${deputy.status}".`);
-                } else {
-                    showConfirmation("Erro!", "O link de votação é inválido ou expirou.");
-                }
-            }
-            
-            // Carrega os status salvos do localStorage
-            function loadSavedStatuses() {
-                 deputados.forEach(deputy => {
-                    const savedStatus = localStorage.getItem(`deputy_status_${deputy.id}`);
-                    if (savedStatus) deputy.status = savedStatus;
-                });
-            }
-
-            // --- INICIALIZAÇÃO ---
-            initializeDeputies();
-            loadSavedStatuses();
-            populateFaq();
-            populateStateSelector();
-            
-            processUrlVote();
-            
-            if (document.getElementById('confirmation-screen').classList.contains('hidden')) {
-                 renderDeputies('');
-            }
-           
-            document.getElementById('state-select').addEventListener('change', (e) => renderDeputies(e.target.value));
-            document.getElementById('support-form').addEventListener('submit', handleFormSubmit);
-            document.getElementById('voter-id').addEventListener('input', () => validaTituloEleitor(document.getElementById('voter-id').value));
-        });
-    </script>
-</body>
-</html>
+    // ----- MUDANÇA PRINCIPAL AQUI -----
+    // Este bloco 'fetch' foi ajustado para processar a resposta do Google corretamente.
+    fetch(WEB_APP_URL, {
+        method: 'POST',
+        mode: 'cors', // Permite que o navegador leia a resposta do script
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => response.json()) // Primeiro, converte a resposta em formato JSON
+    .then(result => {                  // Agora, trabalha com o resultado do script
+        if (result.status === 'success') {
+            showConfirmation('Apoio Registrado!', `Obrigado! Seu apoio foi enviado com sucesso. Você receberá uma confirmação por e-mail em: ${data.email}`);
+            form.reset();
+            const tituloInput = document.getElementById('voter-id');
+            tituloInput.classList.remove('border-red-500', 'border-green-500');
+        } else {
+            // Mostra o erro exato retornado pelo Google Apps Script
+            console.error('Erro retornado pelo script:', result.message);
+            showConfirmation('Erro no Envio', 'Não foi possível registrar seu apoio. Detalhe do erro: ' + result.message);
+        }
+    })
+    .catch(error => {
+        // Captura erros de rede (ex: sem internet) ou de processamento do JSON
+        console.error('Erro de conexão ou de processamento JSON:', error);
+        showConfirmation('Erro de Conexão', 'Não foi possível se comunicar com o servidor. Verifique sua conexão com a internet e tente novamente.');
+    })
+    .finally(() => {
+        // Garante que o botão volte ao normal em qualquer cenário
+        buttonText.classList.remove('hidden');
+        buttonLoader.classList.add('hidden');
+        submitButton.disabled = false;
+    });
+}
