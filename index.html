@@ -117,16 +117,16 @@
                         <form id="support-form" class="space-y-4">
                             <div>
                                 <label for="full-name" class="block text-sm font-medium text-gray-700">Nome Completo</label>
-                                <input type="text" id="full-name" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors">
+                                <input type="text" id="full-name" name="nome" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors">
                             </div>
                             <div>
                                 <label for="voter-id" class="block text-sm font-medium text-gray-700">Nº do Título de Eleitor</label>
-                                <input type="text" id="voter-id" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors" maxlength="12">
+                                <input type="text" id="voter-id" name="titulo" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors" maxlength="12">
                                 <p id="voter-id-error" class="text-red-600 text-xs mt-1 hidden">Título de eleitor inválido.</p>
                             </div>
                              <div>
                                 <label for="email" class="block text-sm font-medium text-gray-700">E-mail para contato</label>
-                                <input type="email" id="email" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors">
+                                <input type="email" id="email" name="email" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors">
                             </div>
                             <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md">
                                 <p class="font-bold">Atenção!</p>
@@ -268,7 +268,7 @@
                  { id: 182, nome: "Fernando Coelho Filho", partido: "UNIÃO", estado: "PE" }, { id: 183, nome: "Fernando Giacobo", partido: "PL", estado: "PR" },
                  { id: 184, nome: "Fernando Holiday", partido: "PL", estado: "SP" }, { id: 185, nome: "Fernando Máximo", partido: "UNIÃO", estado: "RO" },
                  { id: 186, nome: "Fernando Mineiro", partido: "PT", estado: "RN" }, { id: 187, nome: "Fernando Monteiro", partido: "PP", estado: "PE" },
-                 { id: 188, nome: "Filipe Barros", partido: "PL", estado: "PR" }, { id: 189, nome: "Filipe Martins", partido: "PL", estado: "TO" },
+                 { id: 188, nome: "Filipe Barros", partido: "PL", estado: "PR" }, { id: 189, nome: "Filipe Martins", partido: "PL", "estado": "TO" },
                  { id: 190, nome: "Flávia Morais", partido: "PDT", estado: "GO" }, { id: 191, nome: "Flaviano Melo", partido: "MDB", estado: "AC" },
                  { id: 192, nome: "Flávio Nogueira", partido: "PT", estado: "PI" }, { id: 193, nome: "Florentino Neto", partido: "PT", estado: "PI" },
                  { id: 194, nome: "Franciane Bayer", partido: "REPUBLICANOS", estado: "RS" }, { id: 195, nome: "Francisco Costa", partido: "PT", estado: "PI" },
@@ -323,23 +323,23 @@
                  { id: 303, "nome": "Leda Borges", "partido": "PSDB", "estado": "GO" }, { id: 305, "nome": "Léo Moraes", "partido": "PODE", "estado": "RO" },
                  { id: 306, "nome": "Léo Prates", "partido": "PDT", "estado": "BA" }, { id: 307, "nome": "Leonardo Monteiro", "partido": "PT", "estado": "MG" },
                  { id: 308, "nome": "Leonardo Picciani", "partido": "MDB", "estado": "RJ" }, { id: 310, "nome": "Leur Lomanto Júnior", "partido": "UNIÃO", "estado": "BA" },
-                 { id: 311, "nome": "Lídice da Mata", "partido": "PSB", "estado": "BA" }, { id: 312, "nome": "Lincoln Portela", "partido": "PL", "estado": "MG" },
-                 { id: 313, "nome": "Lindbergh Farias", "partido": "PT", "estado": "RJ" }, { id: 314, "nome": "Liziane Bayer", "partido": "REPUBLICANOS", "estado": "RS" },
-                 { id: 315, "nome": "Loester Trutis", "partido": "PL", "estado": "MS" }, { id: 317, "nome": "Lucas Gonzalez", "partido": "NOVO", "estado": "MG" },
-                 { id: 318, "nome": "Lucas Redecker", "partido": "PSDB", "estado": "RS" }, { id: 319, "nome": "Luciano Alves", "partido": "PSD", "estado": "PR" },
-                 { id: 320, "nome": "Luciano Amaral", "partido": "PV", "estado": "AL" }, { id: 321, "nome": "Luciano Bivar", "partido": "UNIÃO", "estado": "PE" },
-                 { id: 322, "nome": "Luciano Ducci", "partido": "PSB", "estado": "PR" }, { id: 323, "nome": "Lucio Mosquini", "partido": "MDB", "estado": "RO" },
-                 { id: 324, "nome": "Luisa Canziani", "partido": "PSD", "estado": "PR" }, { id: 325, "nome": "Luiz Philippe de Orleans e Bragança", "partido": "PL", "estado": "SP" },
-                 { id: 326, "nome": "Luiza Erundina", "partido": "PSOL", "estado": "SP" }, { id: 327, "nome": "Luizianne Lins", "partido": "PT", "estado": "CE" },
+                 { id: 311, "nome": "Lídice da Mata", "partido": "PSB", "estado": "BA" }, { id: 312, nome: "Lincoln Portela", "partido": "PL", "estado": "MG" },
+                 { id: 313, "nome": "Lindbergh Farias", "partido": "PT", "estado": "RJ" }, { id: 314, nome: "Liziane Bayer", "partido": "REPUBLICANOS", "estado": "RS" },
+                 { id: 315, "nome": "Loester Trutis", "partido": "PL", "estado": "MS" }, { id: 317, nome: "Lucas Gonzalez", "partido": "NOVO", "estado": "MG" },
+                 { id: 318, "nome": "Lucas Redecker", "partido": "PSDB", "estado": "RS" }, { id: 319, nome: "Luciano Alves", "partido": "PSD", "estado": "PR" },
+                 { id: 320, nome: "Luciano Amaral", "partido": "PV", "estado": "AL" }, { id: 321, nome: "Luciano Bivar", "partido": "UNIÃO", "estado": "PE" },
+                 { id: 322, nome: "Luciano Ducci", "partido": "PSB", "estado": "PR" }, { id: 323, nome: "Lucio Mosquini", "partido": "MDB", "estado": "RO" },
+                 { id: 324, nome: "Luisa Canziani", "partido": "PSD", "estado": "PR" }, { id: 325, nome: "Luiz Philippe de Orleans e Bragança", "partido": "PL", "estado": "SP" },
+                 { id: 326, nome: "Luiza Erundina", "partido": "PSOL", "estado": "SP" }, { id: 327, nome: "Luizianne Lins", "partido": "PT", "estado": "CE" },
                  { id: 328, "nome": "Luiz Carlos Motta", "partido": "PL", "estado": "SP" }, { id: 329, "nome": "Luiz Gastão", "partido": "PSD", "estado": "CE" },
                  { id: 330, "nome": "Luiz Lima", "partido": "PL", "estado": "RJ" }, { id: 331, "nome": "Luiz Nishimori", "partido": "PSD", "estado": "PR" },
-                 { id: 332, "nome": "Magda Mofatto", "partido": "PL", "estado": "GO" }, { id: 333, "nome": "Marangoni", "partido": "UNIÃO", "estado": "SP" },
+                 { id: 332, nome: "Magda Mofatto", "partido": "PL", "estado": "GO" }, { id: 333, "nome": "Marangoni", "partido": "UNIÃO", "estado": "SP" },
                  { id: 334, "nome": "Marcel van Hattem", "partido": "NOVO", "estado": "RS" }, { id: 335, "nome": "Marcelo Álvaro Antônio", "partido": "PL", "estado": "MG" },
-                 { id: 336, "nome": "Marcelo Aro", "partido": "PP", "estado": "MG" }, { id: 337, "nome": "Marcelo Crivella", "partido": "REPUBLICANOS", "estado": "RJ" },
-                 { id: 338, "nome": "Marcelo Freixo", "partido": "PT", "estado": "RJ" }, { id: 339, "nome": "Marcelo Lima", "partido": "SOLIDARIEDADE", "estado": "SP" },
-                 { id: 340, "nome": "Marcelo Moraes", "partido": "PL", "estado": "RS" }, { id: 341, "nome": "Marcelo Queiroz", "partido": "PP", "estado": "RJ" },
-                 { id: 342, "nome": "Márcia Lia", "partido": "PT", "estado": "SP" }, { id: 343, "nome": "Marcio Alvino", "partido": "PL", "estado": "SP" },
-                 { id: 344, "nome": "Márcio Biolchi", "partido": "MDB", "estado": "RS" }, { id: 345, "nome": "Marcio Jerry", "partido": "PCdoB", "estado": "MA" },
+                 { id: 336, nome: "Marcelo Aro", "partido": "PP", "estado": "MG" }, { id: 337, nome: "Marcelo Crivella", "partido": "REPUBLICANOS", "estado": "RJ" },
+                 { id: 338, nome: "Marcelo Freixo", "partido": "PT", "estado": "RJ" }, { id: 339, nome: "Marcelo Lima", "partido": "SOLIDARIEDADE", "estado": "SP" },
+                 { id: 340, nome: "Marcelo Moraes", "partido": "PL", "estado": "RS" }, { id: 341, nome: "Marcelo Queiroz", "partido": "PP", "estado": "RJ" },
+                 { id: 342, nome: "Márcia Lia", "partido": "PT", "estado": "SP" }, { id: 343, nome: "Marcio Alvino", "partido": "PL", "estado": "SP" },
+                 { id: 344, nome: "Márcio Biolchi", "partido": "MDB", "estado": "RS" }, { id: 345, nome: "Marcio Jerry", "partido": "PCdoB", "estado": "MA" },
                  { id: 346, nome: "Marcio Labre", "partido": "PL", estado: "RJ" }, { id: 347, nome: "Márcio Macedo", "partido": "PT", "estado": "SE" },
                  { id: 348, nome: "Marco Bertaiolli", "partido": "PSD", "estado": "SP" }, { id: 349, nome: "Marco Brasil", "partido": "PP", "estado": "PR" },
                  { id: 350, nome: "Marco Feliciano", "partido": "PL", "estado": "SP" }, { id: 351, nome: "Marcon", "partido": "PT", "estado": "RS" },
@@ -376,7 +376,7 @@
                  { id: 416, nome: "Paulo Teixeira", "partido": "PT", "estado": "SP" }, { id: 417, nome: "Pedro Aihara", "partido": "PATRIOTA", "estado": "MG" },
                  { id: 418, nome: "Pedro Campos", "partido": "PSB", estado: "PE" }, { id: 419, nome: "Pedro Lucas Fernandes", "partido": "UNIÃO", "estado": "MA" },
                  { id: 420, nome: "Pedro Lupion", "partido": "PP", "estado": "PR" }, { id: 421, nome: "Pedro Paulo", "partido": "PSD", "estado": "RJ" },
-                 { id: 422, nome: "Pedro Uczai", "partido": "PT", "estado": "SC" }, { id: 423, nome: "Pinheirinho", "partido": "PP", "estado": "MG" },
+                 { id: 22, nome: "Pedro Uczai", "partido": "PT", "estado": "SC" }, { id: 423, nome: "Pinheirinho", "partido": "PP", "estado": "MG" },
                  { id: 424, nome: "Pompeo de Mattos", "partido": "PDT", "estado": "RS" }, { id: 425, nome: "Professor Alcides", "partido": "PL", "estado": "GO" },
                  { id: 426, nome: "Professor Joziel", "partido": "PATRIOTA", "estado": "RJ" }, { id: 427, nome: "Professor Paulo Fernando", "partido": "REPUBLICANOS", "estado": "DF" },
                  { id: 428, nome: "Professora Luciene Cavalcante", "partido": "PSOL", "estado": "SP" }, { id: 429, nome: "Rafael Brito", "partido": "MDB", "estado": "AL" },
@@ -563,32 +563,21 @@
                 
                 // URL do seu Google Apps Script.
                 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyQI-kCGQcrpIgEzXG59FLdAlZlF0uYsnhXbL2TXHydFcCvNa09Yiu-wqZ0qaxZsK-l/exec";
-
-                // Monta o objeto com os dados do formulário para o Apps Script
-                const data = {
-                    nome: document.getElementById('full-name').value,
-                    titulo: document.getElementById('voter-id').value,
-                    email: document.getElementById('email').value
-                };
-
+                
                 buttonText.classList.add('hidden');
                 buttonLoader.classList.remove('hidden');
                 submitButton.disabled = true;
 
-                // Envia os dados para o seu Google Apps Script (Versão Corrigida)
+                // Envia os dados usando FormData para evitar problemas de CORS
                 fetch(WEB_APP_URL, {
                     method: 'POST',
-                    mode: 'cors', // Permite que o navegador receba uma resposta
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
+                    body: new FormData(form),
                 })
                 .then(response => response.json()) // Processa a resposta do Google
                 .then(result => {
                     // Verifica se o Google confirmou o sucesso
                     if (result.status === 'success') {
-                        showConfirmation('Apoio Registrado!', `Obrigado! Seu apoio foi enviado com sucesso. Você receberá uma confirmação por e-mail em: ${data.email}`);
+                        showConfirmation('Apoio Registrado!', `Obrigado! Seu apoio foi enviado com sucesso. Você receberá uma confirmação por e-mail em: ${form.elements.email.value}`);
                         form.reset();
                         const tituloInput = document.getElementById('voter-id');
                         tituloInput.classList.remove('border-red-500', 'border-green-500');
